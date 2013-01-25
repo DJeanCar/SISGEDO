@@ -20,3 +20,8 @@ def nuevo_usuario(request):
 		formulario = RegisterUserCreateForm()
 	return render_to_response('nuevousuario.html', {'formulario':formulario}, context_instance=RequestContext(request))
 
+def editar(request):
+	variable='hj'
+	if variable =='admin':
+		return render_to_response('editar_adm.html', context_instance=RequestContext(request))
+	return render_to_response('editar_user.html', context_instance=RequestContext(request))	
