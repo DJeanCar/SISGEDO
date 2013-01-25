@@ -9,6 +9,10 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from principal.forms import PerfilForm
 
+def lista_usuarios(request):
+	usuarios = User.objects.all()
+	return render_to_response('usuarios.html', {'usuarios':usuarios}, context_instance=RequestContext(request))
+
 #Registrar un nuevo usuario al sistema.
 def nuevo_usuario(request):
 	if request.method=='POST':
@@ -21,6 +25,10 @@ def nuevo_usuario(request):
 		formulario = RegisterUserCreateForm()
 	return render_to_response('nuevousuario.html', {'formulario':formulario}, context_instance=RequestContext(request))
 
+def ver_usuario(request, id_usuario):	
+	dato = User.objects.get(pk=id_usuario)
+	dato2 = PerfilUsuario.objects.filter(usuario=id_usuario)
+	return render_to_response('ver_usuario.html',{'usuario':dato,'verPerfil':dato2},context_instance = RequestContext(request))
 
 def nuevo_perfil(request):
 	if request.method=='POST':
