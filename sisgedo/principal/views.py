@@ -30,4 +30,5 @@ def nuevo_perfil(request):
 			return HttpResponseRedirect('/registrar')
 	else: 
 		formulario=PerfilForm()
-	return render_to_response('nuevousuario.html',{'formulario':formulario}, context_instance=RequestContext(request))
+	return render_to_response('nuevoperfil.html',{'formulario':formulario}, context_instance=RequestContext(request))
+
