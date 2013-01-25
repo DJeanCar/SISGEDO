@@ -4,6 +4,7 @@ from django import forms
 from principal.models import *
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
+from principal.models import PerfilUsuario
 
 #RegisterUserCreateForm es un formulario que cambia el UserCreationForm
 #para excluir algunos campos que no son necesarios para el sistema actual.
@@ -18,3 +19,7 @@ class RegisterUserCreateForm(UserCreationForm):
         if commit:
             user.save()
         return user
+
+class PerfilForm(ModelForm):
+	class Meta:
+		model=PerfilUsuario

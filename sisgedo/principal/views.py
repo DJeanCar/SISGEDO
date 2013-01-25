@@ -7,6 +7,7 @@ from django.template import RequestContext
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
+from principal.forms import PerfilForm
 
 #Registrar un nuevo usuario al sistema.
 def nuevo_usuario(request):
@@ -19,3 +20,14 @@ def nuevo_usuario(request):
 	else:
 		formulario = RegisterUserCreateForm()
 	return render_to_response('nuevousuario.html', {'formulario':formulario}, context_instance=RequestContext(request))
+
+
+def nuevo_perfil(request):
+	if request.method=='POST':
+		formulario=PerfilForm(request.POST, request.FILES)
+		if formulario.is_valid():
+			formulario.save()
+			return HttpResponseRedirect('/registrar')
+	else: 
+		formulario=PerfilForm()
+	return render_to_response('nuevousuario.html',{'formulario':formulario}, context_instance=RequestContext(request))
