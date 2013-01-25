@@ -9,6 +9,8 @@ from principal.models import PerfilUsuario
 #RegisterUserCreateForm es un formulario que cambia el UserCreationForm
 #para excluir algunos campos que no son necesarios para el sistema actual.
 class RegisterUserCreateForm(UserCreationForm):
+    first_name = forms.CharField(label = "Nombres", max_length=200)
+    email = forms.EmailField(label = "Email")
     class Meta:
         model = User
         #Exclude nos ayuda a excluir algunos campos del modelo.
