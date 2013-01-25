@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+	Usuarios
+{% endblock titulo %}
+
+{% block contenido %}
+		<table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Nombre</th>
+                  <th>Apellidos</th>
+                  <th>Usuario</th>
+                  <th>DNI</th>
+                  <th>Ver</th>
+                  <th>Editar</th>
+                  <th>Crear Perfil</th>
+                </tr>
+              </thead>
+              <tbody>
+              	{% for usuario in usuarios %}
+                <tr>
+                  <td>{{usuario.id}}</td>
+                  <td>{{usuario.first_name}}</td>
+                  <td>{{usuario.last_name}}</td>
+                  <td>{{usuario.username}}</td>
+                  <td>{{usuario.dni}}</td>
+                  <td>Ver</td>
+                  <td>Modificar</td>
+                  <td>Crear Perfil</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+{% endblock contenido %}
