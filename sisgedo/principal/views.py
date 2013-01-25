@@ -8,7 +8,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 
-
+#Registrar un nuevo usuario al sistema.
 def nuevo_usuario(request):
 	if request.method=='POST':
 		formulario = RegisterUserCreateForm(request.POST)
@@ -19,4 +19,3 @@ def nuevo_usuario(request):
 	else:
 		formulario = RegisterUserCreateForm()
 	return render_to_response('nuevousuario.html', {'formulario':formulario}, context_instance=RequestContext(request))
-
