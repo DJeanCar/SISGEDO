@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block titulo %} Detalle del Usuario{%  endblock %}
+{% block encabezado %}
+	<h2><strong> Detalle del Usuario</strong></h1>
+{% endblock %}
+
+{% block contenido %}
+	<h1>{{usuario.id}}</h1>
+	<h2>Nombre:</h2>{{usuario.first_name}}
+	<h2>Apellido:</h2>{{usuario.last_name}}
+    <h2>Username:</h2>{{usuario.username}} 
+    <h2>DNI:</h2>{{usuario.dni}}
+    <h2>e-mail:</h2>{{usuario.email}}
+    <h2>Direccion:</h2>{{usuario.dreccion}}
+    <h2>Teléfono:</h2>{{usuario.telefono}}
+    <h2>DNI:</h2>{{usuario.dni}}             
+                  
+                
+	<h2>Perfiles:</h2>
+	
+
+{% endblock %}
