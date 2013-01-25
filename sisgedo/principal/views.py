@@ -7,8 +7,13 @@ from django.template import RequestContext
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
+from principal.forms import PerfilForm
 
+def lista_usuarios(request):
+	usuarios = User.objects.all()
+	return render_to_response('usuarios.html', {'usuarios':usuarios}, context_instance=RequestContext(request))
 
+#Registrar un nuevo usuario al sistema.
 def nuevo_usuario(request):
 	if request.method=='POST':
 		formulario = RegisterUserCreateForm(request.POST)
@@ -20,8 +25,21 @@ def nuevo_usuario(request):
 		formulario = RegisterUserCreateForm()
 	return render_to_response('nuevousuario.html', {'formulario':formulario}, context_instance=RequestContext(request))
 
-def editar(request):
-	variable='hj'
+def editar(request,id_user):
+	variable ='fd'
 	if variable =='admin':
 		return render_to_response('editar_adm.html', context_instance=RequestContext(request))
+	usuario = User.objects.filter(pk=id_user)
 	return render_to_response('editar_user.html', context_instance=RequestContext(request))	
+
+
+def nuevo_perfil(request):
+	if request.method=='POST':
+		formulario=PerfilForm(request.POST, request.FILES)
+		if formulario.is_valid():
+			formulario.save()
+			return HttpResponseRedirect('/registrar')
+	else: 
+		formulario=PerfilForm()
+	return render_to_response('nuevousuario.html',{'formulario':formulario}, context_instance=RequestContext(request))
+

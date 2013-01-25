@@ -6,7 +6,9 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
 	url(r'^registrar/$', 'principal.views.nuevo_usuario'),
-	url(r'^editar/$', 'principal.views.editar'),
+	url(r'^editar/(?P<id_user>[-\w]+)/$', 'principal.views.editar'),
+	url(r'^perfil_nuevo/$', 'principal.views.nuevo_perfil'),
+	url(r'^usuarios/$', 'principal.views.lista_usuarios'),
     # Examples:
     # url(r'^$', 'sisgedo.views.home', name='home'),
     # url(r'^sisgedo/', include('sisgedo.foo.urls')),
