@@ -9,16 +9,11 @@ urlpatterns = patterns('',
 	url(r'^editar/(?P<id_user_modificar>\d+)/$', 'principal.views.editar'),
 	url(r'^perfil_nuevo/$', 'principal.views.nuevo_perfil'),
 	url(r'^usuarios/$', 'principal.views.lista_usuarios'),
-<<<<<<< HEAD
 
     url(r'^ver_usuario/(?P<id_usuario>\d+)$','principal.views.ver_usuario'),
-	
 
-    # Examples:
-=======
-    url(r'^ver_usuario/(?P<id_usuario>\d+)$','principal.views.ver_usuario'),
 	# Examples:
->>>>>>> 64983ee558b09b3d3c65867bd78754b512d1ee00
+
     # url(r'^$', 'sisgedo.views.home', name='home'),
     # url(r'^sisgedo/', include('sisgedo.foo.urls')),
 
