@@ -11,8 +11,8 @@ urlpatterns = patterns('',
     url(r'^crear_perfil/(?P<id_usuario>\d+)$','principal.views.crear_perfil'),
 	url(r'^editar/(?P<id_user>[-\w]+)/$', 'principal.views.editar'),
 	url(r'^perfil_nuevo/$', 'principal.views.nuevo_perfil'),
-    # url(r'^$', 'sisgedo.views.home', name='home'),
-    # url(r'^sisgedo/', include('sisgedo.foo.urls')),
+	url(r'^editar/(?P<id_user_modificar>\d+)/$', 'principal.views.editar'),
+    url(r'^perfil/editar/$', 'principal.views.editar_post'),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
