@@ -23,8 +23,8 @@
                   <th>Nombres</th>
                   <th>Apellidos</th>
                   <th>Usuario</th>
-                  <th>Status</th>
-                  <th>Actions</th>
+                  <th>DNI</th>
+                  <th>Acciones</th>
                 </tr>
               </thead>   
               <tbody>
@@ -33,8 +33,18 @@
                   <td>{{usuario.first_name}}</td>
                   <td>{{usuario.last_name}}</td>
                   <td>{{usuario.username}}</td>
-                  <td><a class="btn btn-info" href="/ver_usuario/{{usuario.id}}">Ver</a></td>
-                  <td>Modificar</td>
+                  <td>{{usuario.dni}}</td>
+                  <td class="center">
+                    <a class="btn btn-success" href="/ver_usuario/{{usuario.id}}">
+                      <i class="icon-zoom-in icon-white"></i>  
+                    </a>
+                    <a class="btn btn-info" href="#">
+                      <i class="icon-edit icon-white"></i>  
+                    </a>
+                    <a class="btn btn-danger" href="#">
+                      <i class="icon-user icon-white"></i> 
+                    </a>
+                </td>
                 </tr>
                 {% endfor %}
               </tbody>
@@ -44,33 +54,4 @@
       
       </div><!--/row-->
 
-
-		<table class="table table-hover">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Nombre</th>
-                  <th>Apellidos</th>
-                  <th>Usuario</th>
-                  <th>DNI</th>
-                  <th>Ver</th>
-                  <th>Editar</th>
-                  <th>Crear Perfil</th>
-                </tr>
-              </thead>
-              <tbody>
-              	{% for usuario in usuarios %}
-                <tr>
-                  <td>{{usuario.id}}</td>
-                  <td>{{usuario.first_name}}</td>
-                  <td>{{usuario.last_name}}</td>
-                  <td>{{usuario.username}}</td>
-                  <td>{{usuario.dni}}</td>
-                  <td><a class="btn btn-info" href="/ver_usuario/{{usuario.id}}">Ver</a></td>
-                  <td>Modificar</td>
-                  <td>Crear Perfil</td>
-                </tr>
-                {% endfor %}
-              </tbody>
-            </table>
 {% endblock contenido %}
