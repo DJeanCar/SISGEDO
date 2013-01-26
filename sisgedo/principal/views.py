@@ -25,6 +25,13 @@ def nuevo_usuario(request):
 		formulario = RegisterUserCreateForm()
 	return render_to_response('nuevousuario.html', {'formulario':formulario}, context_instance=RequestContext(request))
 
+def editar_post(request, id_user_modificar):
+	usuario=request.user
+	user_modificar = usuario.id
+	if usuario.is_superuser == 1:
+		return render_to_response('editar_adm.html',{'usuario' :user_modificar}, context_instance=RequestContext(request))
+	else:
+		return render_to_response('editar_user.html',{'usuario' :user_modificar}, context_instance=RequestContext(request))	
 
 
 def editar(request,id_user_modificar):
@@ -35,22 +42,13 @@ def editar(request,id_user_modificar):
 	else:
 		return render_to_response('editar_user.html',{'usuario' :user_modificar}, context_instance=RequestContext(request))	
 
-
-def editar(request,id_user):
-	variable ='fd'
-	if variable =='admin':
-		return render_to_response('editar_adm.html', context_instance=RequestContext(request))
-	usuario = User.objects.filter(pk=id_user)
-	return render_to_response('editar_user.html', context_instance=RequestContext(request))	
-
-
 def ver_usuario(request, id_usuario):	
 	dato = User.objects.get(pk=id_usuario)
 	dato2 = PerfilUsuario.objects.filter(usuario=id_usuario)
 	return render_to_response('ver_usuario.html',{'usuario':dato,'verPerfil':dato2},context_instance = RequestContext(request))
 
-
-def nuevo_perfil(request):
+def crear_perfil(request, id_usuario):
+	PerfilForm.usuario=id_usuario
 	if request.method=='POST':
 		formulario=PerfilForm(request.POST, request.FILES)
 		if formulario.is_valid():

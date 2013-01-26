@@ -7,13 +7,14 @@ admin.autodiscover()
 urlpatterns = patterns('',
 	url(r'^registrar/$', 'principal.views.nuevo_usuario'),
 	url(r'^editar/(?P<id_user_modificar>\d+)/$', 'principal.views.editar'),
-	url(r'^perfil_nuevo/$', 'principal.views.nuevo_perfil'),
+    url(r'^perfil/editar/$', 'principal.views.editar_post'),
+	#url(r'^perfil_nuevo/$', 'principal.views.nuevo_perfil'),
+	url(r'^usuarios/$', 'principal.views.lista_usuarios'),
+    url(r'^ver_usuario/(?P<id_usuario>\d+)$','principal.views.ver_usuario'),
+    url(r'^crear_perfil/(?P<id_usuario>\d+)$','principal.views.crear_perfil'),
 	url(r'^usuarios/$', 'principal.views.lista_usuarios'),
 
     url(r'^ver_usuario/(?P<id_usuario>\d+)$','principal.views.ver_usuario'),
-
-	# Examples:
-
     # url(r'^$', 'sisgedo.views.home', name='home'),
     # url(r'^sisgedo/', include('sisgedo.foo.urls')),
 

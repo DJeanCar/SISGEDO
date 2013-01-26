@@ -34,6 +34,9 @@
                   <td>{{usuario.last_name}}</td>
                   <td>{{usuario.username}}</td>
                   <td>{{usuario.dni}}</td>
+                  <td><a href="/ver_usuario/{{usuario.id}}">Ver</a></td>
+                  <td>Modificar</td>
+                  <td><a href="/crear_perfil/{{usuario.id}}">Crear Perfil</a></td>
                   <td class="center">
                     <a class="btn btn-success" href="/ver_usuario/{{usuario.id}}">
                       <i class="icon-zoom-in icon-white"></i>  
@@ -44,8 +47,7 @@
                     <a class="btn btn-danger" href="#">
                       <i class="icon-user icon-white"></i> 
                     </a>
-                </td>
-
+                  </td>
                 </tr>
                 {% endfor %}
               </tbody>
