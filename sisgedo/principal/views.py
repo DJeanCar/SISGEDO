@@ -25,6 +25,7 @@ def nuevo_usuario(request):
 		formulario = RegisterUserCreateForm()
 	return render_to_response('nuevousuario.html', {'formulario':formulario}, context_instance=RequestContext(request))
 
+<<<<<<< HEAD
 
 def editar(request,id_user_modificar):
 	usuario=request.user
@@ -34,12 +35,23 @@ def editar(request,id_user_modificar):
 	else:
 		return render_to_response('editar_user.html',{'usuario' :user_modificar}, context_instance=RequestContext(request))	
 
+=======
+def editar(request,id_user):
+	variable ='fd'
+	if variable =='admin':
+		return render_to_response('editar_adm.html', context_instance=RequestContext(request))
+	usuario = User.objects.filter(pk=id_user)
+	return render_to_response('editar_user.html', context_instance=RequestContext(request))	
+>>>>>>> 64983ee558b09b3d3c65867bd78754b512d1ee00
 
 def ver_usuario(request, id_usuario):	
 	dato = User.objects.get(pk=id_usuario)
 	dato2 = PerfilUsuario.objects.filter(usuario=id_usuario)
 	return render_to_response('ver_usuario.html',{'usuario':dato,'verPerfil':dato2},context_instance = RequestContext(request))
+<<<<<<< HEAD
 
+=======
+>>>>>>> 64983ee558b09b3d3c65867bd78754b512d1ee00
 
 def nuevo_perfil(request):
 	if request.method=='POST':
@@ -49,6 +61,10 @@ def nuevo_perfil(request):
 			return HttpResponseRedirect('/registrar')
 	else: 
 		formulario=PerfilForm()
+<<<<<<< HEAD
 
 	return render_to_response('nuevoperfil.html',{'formulario':formulario}, context_instance=RequestContext(request))
 
+=======
+	return render_to_response('nuevoperfil.html',{'formulario':formulario}, context_instance=RequestContext(request))
+>>>>>>> 64983ee558b09b3d3c65867bd78754b512d1ee00
