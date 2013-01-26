@@ -37,7 +37,8 @@ def ver_usuario(request, id_usuario):
 	dato2 = PerfilUsuario.objects.filter(usuario=id_usuario)
 	return render_to_response('ver_usuario.html',{'usuario':dato,'verPerfil':dato2},context_instance = RequestContext(request))
 
-def nuevo_perfil(request):
+def crear_perfil(request, id_usuario):
+	PerfilForm.usuario=id_usuario
 	if request.method=='POST':
 		formulario=PerfilForm(request.POST, request.FILES)
 		if formulario.is_valid():
