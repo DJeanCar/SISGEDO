@@ -101,7 +101,19 @@ $(document).ready(function() {
         "sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6 center'p>>",
         "sPaginationType": "bootstrap",
         "oLanguage": {
-            "sLengthMenu": "_MENU_ records per page"
+            "sLengthMenu": "Mostrar _MENU_ registros por pagina",
+            "sZeroRecords": "No se encontro ningun registro.",
+            "sInfo": "Mostrando _START_ a _END_ de _TOTAL_ registros.",
+            "sInfoEmpty": "Mostrando 0 a 0 de 0 registros",
+            "sInfoFiltered": "(Filtrado de _MAX_ registros en total.)",
+            "sSearch": "Buscar:",
+            "sProcessing": "Espere, por favor...",
+            "oPaginate": {
+                "sPrevious": "Anterior",
+                "sNext": "Siguiente",
+                "sLast": "Ultima",
+                "sFirst": "Primera"
+            }, 
         }
     } );
 } );
