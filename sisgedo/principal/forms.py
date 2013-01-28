@@ -25,5 +25,7 @@ class RegisterUserCreateForm(UserCreationForm):
 class PerfilForm(ModelForm):
 	class Meta:
 		model=PerfilUsuario
-        exclude = ("usuario")
+
+        
+
 

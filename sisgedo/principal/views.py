@@ -46,13 +46,18 @@ def ver_usuario(request, id_usuario):
 	dato2 = PerfilUsuario.objects.filter(usuario=id_usuario)
 	return render_to_response('ver_usuario.html',{'usuario':dato,'verPerfil':dato2},context_instance = RequestContext(request))
 
-def crear_perfil(request, id_usuario):
-	PerfilForm.usuario=id_usuario
+def nuevo_perfil(request, id_usuario):	
+	dato = User.objects.get(pk=id_usuario)
 	if request.method=='POST':
-		formulario=PerfilForm(request.POST, request.FILES)
+		formulario=PerfilForm(request.POST)
 		if formulario.is_valid():
 			formulario.save()
-			return HttpResponseRedirect('/registrar')
+			return HttpResponseRedirect('/usuarios')
 	else: 
 		formulario=PerfilForm()
-	return render_to_response('nuevoperfil.html',{'formulario':formulario}, context_instance=RequestContext(request))
+	return render_to_response('nuevoperfil.html',{'formulario':formulario, 'dato':dato}, context_instance=RequestContext(request))
+
+
+
+
+

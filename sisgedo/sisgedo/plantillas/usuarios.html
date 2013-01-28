@@ -6,37 +6,37 @@
 
 {% block contenido %}
     
-            <table class="table table-striped" id="example">
-              <thead>
-                <tr>
-                  <th>Nombres</th>
-                  <th>Apellidos</th>
-                  <th>Usuario</th>
-                  <th>DNI</th>
-                  <th>Acciones</th>
-                </tr>
-              </thead>   
-              <tbody>
-                {% for usuario in usuarios %}
-                <tr>
-                  <td>{{usuario.first_name}}</td>
-                  <td>{{usuario.last_name}}</td>
-                  <td>{{usuario.username}}</td>
-                  <td>{{usuario.dni}}</td>
-                  <td class="center">
-                    <a class="btn btn-success" href="/ver_usuario/{{usuario.id}}">
-                      <i class="icon-zoom-in icon-white"></i>  
-                    </a>
-                    <a class="btn btn-info" href="/perfil/editar/">
-                      <i class="icon-edit icon-white"></i>
-                    </a>
-                    <a class="btn btn-danger" href="#">
-                      <i class="icon-user icon-white"></i> 
-                    </a>
-                  </td>
-                </tr>
-                {% endfor %}
-              </tbody>
-            </table>
+    <table class="table table-striped" id="example">
+      <thead>
+        <tr>
+          <th>Nombres</th>
+          <th>Apellidos</th>
+          <th>Usuario</th>
+          <th>DNI</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>   
+      <tbody>
+        {% for usuario in usuarios %}
+        <tr>
+          <td>{{usuario.first_name}}</td>
+          <td>{{usuario.last_name}}</td>
+          <td>{{usuario.username}}</td>
+          <td>{{usuario.dni}}</td>
+          <td class="center">
+            <a class="btn btn-success" href="/ver_usuario/{{usuario.id}}">
+              <i class="icon-zoom-in icon-white"></i>  
+            </a>
+            <a class="btn btn-info" href="/perfil/editar/">
+              <i class="icon-edit icon-white"></i>
+            </a>
+            <a class="btn btn-danger" href="/nuevo_perfil/{{usuario.id}}">
+              <i class="icon-user icon-white"></i> 
+            </a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
 
 {% endblock contenido %}
