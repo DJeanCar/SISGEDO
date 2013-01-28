@@ -4,16 +4,10 @@ div.dataTables_length label {
 }
 
 div.dataTables_length select {
-	display: inline-block;
 }
 
 div.dataTables_filter label {
 	float: right;
-	display: inline-block;
-}
-
-div.dataTables_info {
-	padding-top: 8px;
 }
 
 div.dataTables_paginate {
@@ -21,15 +15,46 @@ div.dataTables_paginate {
 	margin: 0;
 }
 
-table {
-	margin: 1em 0;
-	clear: both;
+.box-header {
+    background-color: rgb(250, 250, 250);
+    background-image: linear-gradient(to bottom, rgb(250, 250, 250), rgb(239, 239, 239));
+    border: 1px solid rgb(221, 221, 221);
+    border-radius: 2px 2px 0px 0px;
+    box-shadow: none;
+    height: 20px;
+    margin-bottom: -1px;
+    overflow: hidden;
+    padding: 10px;
 }
 
-table.dataTable th:active {
-	outline: none;
+.box-header h2 {
+    color: rgb(100, 100, 100);
+    float: left;
+    font-size: 16px;
+    font-weight: normal;
+    line-height: 16px;
+    margin-top: 2px;
+    text-shadow: 0px 1px 0px rgb(255, 255, 255);
+}
+.box-header h2 i {
+    margin: 1px 3px 0px 5px;
+    opacity: 0.4;
+}
+.box-header .break {
+    border-left: 1px solid rgb(252, 252, 252);
+    border-right: 1px solid rgb(221, 221, 221);
+    margin: -12px 10px -10px;
+    padding: 12px 0px 10px;
 }
 
+.box-content {
+    background: none repeat scroll 0px 0px rgb(252, 252, 252);
+    border: 1px solid rgb(221, 221, 221);
+    border-radius: 0px 0px 2px 2px;
+    box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.6);
+    margin-top: -1px;
+    padding: 10px;
+}
 
 table .header{cursor:pointer;}
 table .header:after{content:"";float:right;margin-top:7px;border-width:0 4px 4px;border-style:solid;border-color:#000 transparent;visibility:hidden;}
