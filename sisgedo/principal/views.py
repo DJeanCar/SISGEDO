@@ -25,9 +25,17 @@ def nuevo_usuario(request):
 		formulario = RegisterUserCreateForm()
 	return render_to_response('nuevousuario.html', {'formulario':formulario}, context_instance=RequestContext(request))
 
-def editar_post(request, id_user_modificar):
+def editar_post(request):
 	usuario=request.user
 	user_modificar = usuario.id
+	if usuario.is_superuser == 1:
+		return render_to_response('editar_adm.html',{'usuario' :usuario}, context_instance=RequestContext(request))
+	else:
+		return render_to_response('editar_user.html',{'usuario' :usuario}, context_instance=RequestContext(request))	
+
+def editar(request, id_user_modificar):
+	usuario=request.user
+	user_modificar = User.objects.get(pk=id_user_modificar)
 	if usuario.is_superuser == 1:
 		return render_to_response('editar_adm.html',{'usuario' :user_modificar}, context_instance=RequestContext(request))
 	else:
