@@ -1,13 +1,39 @@
 {% extends "base.html" %}
 
 {% block titulo %}
-	Registrar Usuario
+	Nuevo Perfil
 {% endblock titulo %}
 
 {% block contenido %}
-	<form action="" id='formulario' method='post' >
-		{% csrf_token %}
-		<table>{{formulario}}</table>
-		<p><input type="submit" value='Añadir perfil'></p>
-	</form>
+
+<form action="" id='formulario' method='post' >
+		<div style='display:none'><input type='hidden' name='csrfmiddlewaretoken' value='7HBK5I7p3MIBF3C5Hk0CsRPV1TSNY7d9' /></div>
+		<table>
+			<tr><th><label for="id_tipo">Tipo:</label></th>
+				<td><select name="tipo" id="id_tipo">
+				<option value="" selected="selected">---------</option>
+				<option value="1">operario</option>
+				<option value="2">supervisor</option>
+				<option value="3">administrador</option>
+				</select>
+				</td>
+			</tr>
+			<tr>
+				<th><label for="id_fecha_registro">Fecha registro:</label></th>
+				<td><input type="text" name="fecha_registro" id="id_fecha_registro" /></td>
+			</tr>
+			<tr>
+				<th><label for="id_fecha_vigencia">Fecha vigencia:</label></th><td><input type="text" name="fecha_vigencia" id="id_fecha_vigencia" /></td>
+			</tr>
+			<tr>
+				<th><label for="id_estado">Estado:</label></th>
+				<td><input type="checkbox" name="estado" id="id_estado" />
+				</td>
+			</tr>			
+			<input type="hidden" name="usuario" id="id_usuario" value="{{dato.id}}" />
+		</table>
+		<p><input type="submit" value='Registrar Usuario'></p>
+</form>
+
+	
 {% endblock contenido %}
