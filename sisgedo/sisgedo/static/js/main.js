@@ -98,7 +98,7 @@ $.extend( $.fn.dataTableExt.oPagination, {
 /* Table initialisation */
 $(document).ready(function() {
     $('#example').dataTable( {
-        "sDom": "<'row'<'span8'l><'span4'f>r>t<'row'<'span8'i><'span4'p>>",
+        "sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6 center'p>>",
         "sPaginationType": "bootstrap",
         "oLanguage": {
             "sLengthMenu": "_MENU_ records per page"
