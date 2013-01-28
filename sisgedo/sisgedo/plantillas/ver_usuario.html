@@ -6,17 +6,54 @@
 {% endblock %}
 
 {% block contenido %}
-	<h1>{{usuario.id}}</h1>
-	<h2>Nombre:</h2>{{usuario.first_name}}
-	<h2>Apellido:</h2>{{usuario.last_name}}
-    <h2>Username:</h2>{{usuario.username}} 
-    <h2>DNI:</h2>{{usuario.dni}}
-    <h2>e-mail:</h2>{{usuario.email}}
-    <h2>Direccion:</h2>{{usuario.dreccion}}
-    <h2>Teléfono:</h2>{{usuario.telefono}}
-    <h2>DNI:</h2>{{usuario.dni}}           
-                
-	<h2>Perfiles:</h2>
-	
+
+<div class="row-fluid sortable">    
+        <div class="box span12">
+          <div class="box-header" data-original-title>
+            <h2><i class="icon-user"></i><span class="break"></span>Perfiles de Usuario</h2>
+            <div class="box-icon">
+              <a href="#" class="btn-setting"><i class="icon-wrench"></i></a>
+              <a href="#" class="btn-minimize"><i class="icon-chevron-up"></i></a>
+              <a href="#" class="btn-close"><i class="icon-remove"></i></a>
+            </div>
+          </div>
+          <div class="box-content">
+            <table class="table table-striped table-bordered bootstrap-datatable datatable">
+              <thead>
+                <tr>
+                  <th>Tipo</th>
+                  <th>Fecha registro</th>
+                  <th>Fecha de vigencia</th>
+                  <th>estado</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>   
+              <tbody>
+                {% for dato in verPerfil %}
+                <tr>
+                  <td>{{dato.tipo}}</td>
+                  <td>{{dato.fecha_registro}}</td>
+                  <td>{{dato.fecha_vigencia}}</td>
+                  <td>{{dato.estado}}</td>
+                  <td class="center">
+                    <a class="btn btn-danger" href="">
+                      <i class="icon-remove icon-white"></i>  
+                    </a>
+                    <a class="btn btn-info" href="">
+                      <i class="icon-edit icon-white"></i>
+                    </a>
+              
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>            
+          </div>
+        </div><!--/span-->
+      
+      </div><!--/row-->
+
+
+
 
 {% endblock %}
