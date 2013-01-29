@@ -1,4 +1,12 @@
 
+        <script src="{{STATIC_URL}}js/bootstrap.min.js"></script> 
+        <script src="{{STATIC_URL}}js/bootstrap-datepicker.js"></script>
+
+	    <script >                         
+            $('#dp').datepicker();         
+        </script>
+
+
 <form action="/nuevo_perfil/{{dato.id}}" id='formulario' method='post' >
 		<div style='display:none'><input type='hidden' name='csrfmiddlewaretoken' value='7HBK5I7p3MIBF3C5Hk0CsRPV1TSNY7d9' /></div>
 		<table>
@@ -10,7 +18,12 @@
 				<option value="administrador">administrador</option>
 				</select>
 				</td>
-			</tr>
+			</tr>		
+			<tr><div class="input-append date" id="dp" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
+         		<input class="span2" size="16" value="12-02-2012" readonly="" type="text">
+          		<span class="add-on"><i class="icon-calendar"></i></span>
+     			</div>
+  			</tr>
 			<tr>
 				<th><label for="id_fecha_registro">Fecha registro:</label></th>
 				<td><input type="text" name="fecha_registro" id="id_fecha_registro" /></td>
