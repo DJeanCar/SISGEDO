@@ -62,7 +62,7 @@ def nuevo_perfil(request, id_usuario):
 		formulario=PerfilForm()
 	return render_to_response('nuevoperfil.html',{'formulario':formulario, 'dato':dato}, context_instance=RequestContext(request))
 
-def editar_perfil(request, id_usuario):
+'''def editar_perfil(request, id_usuario):
 	usuario = PerfilUsuario.objects.get(usuario = id_usuario)
 	if request.method == 'POST':
 		formulario = EditarPerfilForm(request.POST, instance = usuario)
@@ -73,7 +73,15 @@ def editar_perfil(request, id_usuario):
 		formulario = EditarPerfilForm(instance = usuario)
 	return render_to_response("editar_perfil.html", {'usuario': usuario, 'formulario': formulario}, context_instance=RequestContext(request))
 
-
-
+def editar_usuario(request, id_usuario):
+	usuario = User.objects.get(pk = id_usuario)
+	if request.method == 'POST':
+		formulario = EditarUserForm(request.POST, instance = usuario)
+		if formulario.is_valid():
+			formulario.save()
+			return HttpResponseRedirect('/usuarios/')
+	else:
+		formulario = EditarPerfilForm(instance = usuario)
+	return render_to_response("editar_perfil.html", {'usuario': usuario, 'formulario': formulario}, context_instance=RequestContext(request))'''
 
 
