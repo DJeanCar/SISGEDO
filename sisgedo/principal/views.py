@@ -25,6 +25,17 @@ def nuevo_usuario(request):
 		formulario = RegisterUserCreateForm()
 	return render_to_response('nuevousuario.html', {'formulario':formulario}, context_instance=RequestContext(request))
 
+def editar_usuario(request, id_usuario):
+	usuario = User.objects.get(pk = id_usuario)
+	if request.method=='POST':
+		formulario = RegisterUserCreateForm(request.POST, instance=usuario)
+		if formulario.is_valid():
+			formulario.save()
+			return HttpResponseRedirect('/usuarios')
+	else:
+		formulario = RegisterUserCreateForm(instance = usuario)
+	return render_to_response('editarusuario.html', {'formulario':formulario, 'usuario':usuario}, context_instance=RequestContext(request))
+
 def editar_post(request):
 	usuario=request.user
 	user_modificar = usuario.id
