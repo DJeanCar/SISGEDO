@@ -62,26 +62,34 @@ def nuevo_perfil(request, id_usuario):
 		formulario=PerfilForm()
 	return render_to_response('nuevoperfil.html',{'formulario':formulario, 'dato':dato}, context_instance=RequestContext(request))
 
-'''def editar_perfil(request, id_usuario):
-	usuario = PerfilUsuario.objects.get(usuario = id_usuario)
+# login:
+def ingresar(request):	
+	if not request.user.is_anonymous():
+		return HttpResponseRedirect('/privado')
 	if request.method == 'POST':
-		formulario = EditarPerfilForm(request.POST, instance = usuario)
-		if formulario.is_valid():
-			formulario.save()
-			return HttpResponseRedirect('/usuarios/')
+		formulario = AuthenticationForm(request.POST)
+		if formulario.is_valid:
+			usuario = request.POST['username']
+			clave = request.POST['password']
+			acceso = authenticate(username=usuario, password=clave)
+			if acceso is not None:
+				if acceso.is_active:
+					login(request, acceso)
+					return HttpResponseRedirect('/privado')
+				else:
+					return render_to_response('noactivo.html', context_instance=RequestContext(request))
+			else:
+				return render_to_response('nousuario.html', context_instance=RequestContext(request))
 	else:
-		formulario = EditarPerfilForm(instance = usuario)
-	return render_to_response("editar_perfil.html", {'usuario': usuario, 'formulario': formulario}, context_instance=RequestContext(request))
+		formulario = AuthenticationForm()
+	return render_to_response('ingresar.html',{'formulario':formulario}, context_instance=RequestContext(request))
 
-def editar_usuario(request, id_usuario):
-	usuario = User.objects.get(pk = id_usuario)
-	if request.method == 'POST':
-		formulario = EditarUserForm(request.POST, instance = usuario)
-		if formulario.is_valid():
-			formulario.save()
-			return HttpResponseRedirect('/usuarios/')
-	else:
-		formulario = EditarPerfilForm(instance = usuario)
-	return render_to_response("editar_perfil.html", {'usuario': usuario, 'formulario': formulario}, context_instance=RequestContext(request))'''
+@login_required(login_url='/ingresar')
+def privado(request):
+	usuario=request.user
+	return render_to_response('privado.html',{'usuario':usuario},context_instance=RequestContext(request))
 
-
+@login_required(login_url='/ingresar')
+def cerrar(request):
+	logout(request)
+	return HttpResponseRedirect('/cerrar')
