@@ -55,6 +55,20 @@ div.dataTables_paginate {
     margin-top: -1px;
     padding: 10px;
 }
+.box-header .box-icon {
+    float: right;
+    margin-top: 1px;
+}
+.box-header .box-icon i {
+    opacity: 0.4;
+    transition: all 0.1s ease-in-out 0s;
+}
+.box-header .box-icon i:hover {
+    opacity: 0.8;
+}
+.box-header .box-icon a {
+    margin: 0 5px;
+}
 
 table .header{cursor:pointer;}
 table .header:after{content:"";float:right;margin-top:7px;border-width:0 4px 4px;border-style:solid;border-color:#000 transparent;visibility:hidden;}

@@ -7,7 +7,7 @@ from django.template import RequestContext
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
-from principal.forms import PerfilForm
+from principal.forms import PerfilForm, EditarPerfilForm
 
 def lista_usuarios(request):
 	usuarios = User.objects.all()
@@ -20,7 +20,7 @@ def nuevo_usuario(request):
 		#Hay diferencia entre is_valid() y is_valid, mientras que el primero valida mostrando los errores el ultimo no muestra los errores.
 		if formulario.is_valid():
 			formulario.save()
-			return HttpResponseRedirect('/')
+			return HttpResponseRedirect('/usuarios')
 	else:
 		formulario = RegisterUserCreateForm()
 	return render_to_response('nuevousuario.html', {'formulario':formulario}, context_instance=RequestContext(request))
@@ -61,6 +61,17 @@ def nuevo_perfil(request, id_usuario):
 	else: 
 		formulario=PerfilForm()
 	return render_to_response('nuevoperfil.html',{'formulario':formulario, 'dato':dato}, context_instance=RequestContext(request))
+
+def editar_perfil(request, id_usuario):
+	usuario = PerfilUsuario.objects.get(usuario = id_usuario)
+	if request.method == 'POST':
+		formulario = EditarPerfilForm(request.POST, instance = usuario)
+		if formulario.is_valid():
+			formulario.save()
+			return HttpResponseRedirect('/usuarios/')
+	else:
+		formulario = EditarPerfilForm(instance = usuario)
+	return render_to_response("editar_perfil.html", {'usuario': usuario, 'formulario': formulario}, context_instance=RequestContext(request))
 
 
 
