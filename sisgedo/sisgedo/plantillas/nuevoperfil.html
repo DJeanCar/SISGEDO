@@ -1,4 +1,5 @@
-<form action="" id='formulario' method='post' >
+
+<form action="/nuevo_perfil/{{dato.id}}" id='formulario' method='post' >
 		<div style='display:none'><input type='hidden' name='csrfmiddlewaretoken' value='7HBK5I7p3MIBF3C5Hk0CsRPV1TSNY7d9' /></div>
 		<table>
 			<tr><th><label for="id_tipo">Tipo:</label></th>
@@ -23,8 +24,11 @@
 				</td>
 			</tr>			
 			<input type="hidden" name="usuario" id="id_usuario" value="{{dato.id}}" />
-		</table>		
-		<p><input type="submit" value='Registrar Usuario'></p>
+		</table>
+		<br><br>
+		<div align="right">
+	      <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+	      <button type="submit" class="btn btn-primary">Registrar Usuario</button>
+	    </div>
 </form>
 
-	

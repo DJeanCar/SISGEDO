@@ -46,6 +46,11 @@ def ver_usuario(request, id_usuario):
 	dato2 = PerfilUsuario.objects.filter(usuario=id_usuario)
 	return render_to_response('ver_usuario.html',{'usuario':dato,'verPerfil':dato2},context_instance = RequestContext(request))
 
+def ver_perfiles(request, id_usuario):	
+	dato2 = PerfilUsuario.objects.filter(usuario=id_usuario)
+	return render_to_response('ver_perfiles.html',{'verPerfil':dato2},context_instance = RequestContext(request))
+
+
 def nuevo_perfil(request, id_usuario):	
 	dato = User.objects.get(pk=id_usuario)
 	if request.method=='POST':
