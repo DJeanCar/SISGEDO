@@ -13,7 +13,9 @@ urlpatterns = patterns('',
     url(r'^ver_perfiles/(?P<id_usuario>\d+)$','principal.views.ver_perfiles'),
     url(r'^nuevo_perfil/(.+)$','principal.views.nuevo_perfil'),
 
-    url(r'^perfil/editar/$', 'principal.views.editar_post'),
+    url(r'^ingresar/$','principal.views.ingresar'),
+    url(r'^privado/$','principal.views.privado'),
+    url(r'^cerrar/$', 'principal.views.cerrar'),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
