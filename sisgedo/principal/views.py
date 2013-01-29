@@ -27,7 +27,7 @@ def registrar_usuario(request):
 def editar_usuario(request, id_usuario):
 	usuario = User.objects.get(pk = id_usuario)
 	if request.method=='POST':
-		formulario = EditarUserForm(request.POST)
+		formulario = EditarUserForm(request.POST, instance=usuario)
 		if formulario.is_valid():
 			formulario.save()
 			return HttpResponseRedirect('/usuarios')
