@@ -40,9 +40,7 @@
             </a>
             <a class="btn btn-danger" href="/ver_perfiles/{{usuario.id}}">
               <i class="icon-user icon-white"></i>
-            <a data-toggle="modal" class="btn btn-danger" href="/nuevo_perfil/{{usuario.id}}" data-target="#myModal">
-              <i class="icon-user icon-white"></i> 
-            </a>
+            
           </td>
         </tr>
         {% endfor %}
@@ -51,28 +49,5 @@
 
 </div>
 
-<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-<<<<<<< HEAD
-    <div class="modal-header">      
-      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-      <h3 id="myModalLabel">Crear Nuevo Perfil</h3>
-    </div>
-    <div class="modal-body">  
-    </div>
-
-=======
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h3 id="myModalLabel">Perfil</h3>
-  </div>
-    <div class="modal-body">
-
-    </div>
-  <div class="modal-footer">
-    <input class="btn btn-primary" type="submit" value="Save" />
-    <input name="cancel" class="btn" type="submit" value="Cancel"/>
-  </div>
->>>>>>> d44fc217b31987c91f73d697849a4c92a889447a
-</div>
 
 {% endblock contenido %}
