@@ -7,14 +7,13 @@ from django.template import RequestContext
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
-from principal.forms import PerfilForm, EditarPerfilForm
+from principal.forms import PerfilForm, EditarUserForm
 
 def lista_usuarios(request):
 	usuarios = User.objects.all()
 	return render_to_response('usuarios.html', {'usuarios':usuarios}, context_instance=RequestContext(request))
 
-#Registrar un nuevo usuario al sistema.
-def nuevo_usuario(request):
+def registrar_usuario(request):
 	if request.method=='POST':
 		formulario = RegisterUserCreateForm(request.POST)
 		#Hay diferencia entre is_valid() y is_valid, mientras que el primero valida mostrando los errores el ultimo no muestra los errores.
@@ -28,29 +27,13 @@ def nuevo_usuario(request):
 def editar_usuario(request, id_usuario):
 	usuario = User.objects.get(pk = id_usuario)
 	if request.method=='POST':
-		formulario = RegisterUserCreateForm(request.POST, instance=usuario)
+		formulario = EditarUserForm(request.POST)
 		if formulario.is_valid():
 			formulario.save()
 			return HttpResponseRedirect('/usuarios')
 	else:
-		formulario = RegisterUserCreateForm(instance = usuario)
+		formulario = EditarUserForm(instance = usuario)
 	return render_to_response('editarusuario.html', {'formulario':formulario, 'usuario':usuario}, context_instance=RequestContext(request))
-
-def editar_post(request):
-	usuario=request.user
-	user_modificar = usuario.id
-	if usuario.is_superuser == 1:
-		return render_to_response('editar_adm.html',{'usuario' :usuario}, context_instance=RequestContext(request))
-	else:
-		return render_to_response('editar_user.html',{'usuario' :usuario}, context_instance=RequestContext(request))	
-
-def editar(request, id_user_modificar):
-	usuario=request.user
-	user_modificar = User.objects.get(pk=id_user_modificar)
-	if usuario.is_superuser == 1:
-		return render_to_response('editar_adm.html',{'usuario' :user_modificar}, context_instance=RequestContext(request))
-	else:
-		return render_to_response('editar_user.html',{'usuario' :user_modificar}, context_instance=RequestContext(request))	
 
 def ver_usuario(request, id_usuario):	
 	dato = User.objects.get(pk=id_usuario)
@@ -72,27 +55,4 @@ def nuevo_perfil(request, id_usuario):
 	else: 
 		formulario=PerfilForm()
 	return render_to_response('nuevoperfil.html',{'formulario':formulario, 'dato':dato}, context_instance=RequestContext(request))
-
-'''def editar_perfil(request, id_usuario):
-	usuario = PerfilUsuario.objects.get(usuario = id_usuario)
-	if request.method == 'POST':
-		formulario = EditarPerfilForm(request.POST, instance = usuario)
-		if formulario.is_valid():
-			formulario.save()
-			return HttpResponseRedirect('/usuarios/')
-	else:
-		formulario = EditarPerfilForm(instance = usuario)
-	return render_to_response("editar_perfil.html", {'usuario': usuario, 'formulario': formulario}, context_instance=RequestContext(request))
-
-def editar_usuario(request, id_usuario):
-	usuario = User.objects.get(pk = id_usuario)
-	if request.method == 'POST':
-		formulario = EditarUserForm(request.POST, instance = usuario)
-		if formulario.is_valid():
-			formulario.save()
-			return HttpResponseRedirect('/usuarios/')
-	else:
-		formulario = EditarPerfilForm(instance = usuario)
-	return render_to_response("editar_perfil.html", {'usuario': usuario, 'formulario': formulario}, context_instance=RequestContext(request))'''
-
 
