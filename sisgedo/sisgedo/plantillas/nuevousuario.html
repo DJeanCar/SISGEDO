@@ -5,9 +5,66 @@
 {% endblock titulo %}
 
 {% block contenido %}
-	<form action="" id='formulario' method='post' >
-		{% csrf_token %}
-		{{formulario}}
-		<p><input type="submit" value='Registrar Usuario'></p>
-	</form>
+
+    <form action="" id="formulario" class="form-horizontal" method="POST">
+    	{% csrf_token %}
+	    <div class="control-group">
+		    <label class="control-label" for="id_username">Username</label>
+		    <div class="controls">
+			    <input id="id_username" type="text" name="username" maxlength="30" class="input-xlarge">
+		    </div>
+	    </div>
+	    <div class="control-group">
+		    <label class="control-label" for="id_first_name">Nombres</label>
+		    <div class="controls">
+			    <input id="id_first_name" type="text" name="first_name" maxlength="200" class="input-xlarge">
+		    </div>
+	    </div>
+	    <div class="control-group">
+		    <label class="control-label" for="id_last_name">Apellidos</label>
+		    <div class="controls">
+			    <input id="id_last_name" type="text" name="last_name" maxlength="200" class="input-xlarge">
+		    </div>
+	    </div>
+	    <div class="control-group">
+		    <label class="control-label" for="id_email">Email</label>
+		    <div class="controls">
+			    <input type="text" class="input-xlarge" name="email" id="id_email">
+		    </div>
+	    </div>
+	    <div class="control-group">
+		    <label class="control-label" for="id_is_active">Activo</label>
+		    <div class="controls">
+		    	<input checked="checked" type="checkbox" name="is_active" id="id_is_active" class="input-xlarge"/>
+		    </div>
+	    </div>
+	    <div class="control-group">
+		    <label class="control-label" for="id_direccion">Direccion</label>
+		    <div class="controls">
+		    	<input id="id_direccion" type="text" name="direccion" maxlength="500" class="input-xlarge" />
+		    </div>
+	    </div>
+	    <div class="control-group">
+		    <label class="control-label" for="id_telefono">Telefono</label>
+		    <div class="controls">
+		    	<input type="text" name="telefono" id="id_telefono" maxlength="500" class="input-xlarge" />
+		    </div>
+	    </div>
+	    <div class="control-group">
+		    <label class="control-label" for="id_password1">Contraseña</label>
+		    <div class="controls">
+		    	<input type="password" name="password1" id="id_password1" class="input-xlarge" />
+		    </div>
+	    </div>
+	    <div class="control-group">
+		    <label class="control-label" for="id_password2">Confirma tu contraseña</label>
+		    <div class="controls">
+		    	<input type="password" name="password2" id="id_password2" class="input-xlarge" />
+		    </div>
+	    </div>
+	    <div class="form-actions">
+		    <button type="submit" class="btn btn-primary btn-large">Registrar</button>
+		    <button type="reset" class="btn">Cancelar</button>
+	    </div>
+    </form>
 {% endblock contenido %}

@@ -8,11 +8,11 @@ User.add_to_class('telefono', models.PositiveIntegerField(null=True,blank=True))
 
 class PerfilUsuario(models.Model):
 	TIPO=(
-			('1','operario'),
-			('2','supervisor'),
-			('3','administrador'),
+			('operario','operario'),
+			('supervisor','supervisor'),
+			('administrador','administrador'),
 		)
-	tipo = models.CharField(max_length=5,choices=TIPO)
+	tipo = models.CharField(max_length=20,choices=TIPO)
 	fecha_registro = models.DateField() 
 	fecha_vigencia = models.DateField() 
 	estado= models.BooleanField()

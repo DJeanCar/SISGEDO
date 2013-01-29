@@ -26,6 +26,10 @@ class PerfilForm(ModelForm):
 	class Meta:
 		model=PerfilUsuario
 
+class EditarPerfilForm(forms.ModelForm):
+    class Meta:
+        model = PerfilUsuario
+
         
 
 
