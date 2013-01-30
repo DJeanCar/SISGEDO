@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+	Registrar Usuario
+{% endblock titulo %}
+
+{% block contenido %}
+
+    <form action="" id="formulario" class="form-horizontal" method="POST">
+    	{% csrf_token %}
+    	{{formulario.as_p}}
+	    <div class="form-actions">
+		    <button type="submit" class="btn btn-primary btn-large">Registrar</button>
+		    <button type="reset" class="btn">Cancelar</button>
+	    </div>
+    </form>
+{% endblock contenido %}
