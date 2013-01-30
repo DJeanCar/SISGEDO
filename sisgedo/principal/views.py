@@ -24,8 +24,7 @@ def registrar_usuario(request):
 		formulario = RegisterUserCreateForm()
 	return render_to_response('nuevousuario.html', {'formulario':formulario}, context_instance=RequestContext(request))
 
-<<<<<<< HEAD
-=======
+
 def editar_usuario(request, id_usuario):
 	usuario = User.objects.get(pk = id_usuario)
 	if request.method=='POST':
@@ -36,7 +35,7 @@ def editar_usuario(request, id_usuario):
 	else:
 		formulario = EditarUserForm(instance = usuario)
 	return render_to_response('editarusuario.html', {'formulario':formulario, 'usuario':usuario}, context_instance=RequestContext(request))
->>>>>>> b088c8898deff88b319ed09a7a8d9f80a8e382c0
+
 
 def ver_usuario(request, id_usuario):	
 	dato = User.objects.get(pk=id_usuario)
@@ -59,8 +58,7 @@ def nuevo_perfil(request, id_usuario):
 		formulario=PerfilForm()
 	return render_to_response('nuevoperfil.html',{'formulario':formulario, 'dato':dato}, context_instance=RequestContext(request))
 
-<<<<<<< HEAD
-=======
+
 # login:
 def ingresar(request):	
 	if not request.user.is_anonymous():
@@ -87,7 +85,6 @@ def ingresar(request):
 def privado(request):
 	usuario=request.user
 	return render_to_response('privado.html',{'usuario':usuario},context_instance=RequestContext(request))
->>>>>>> b088c8898deff88b319ed09a7a8d9f80a8e382c0
 
 @login_required(login_url='/ingresar')
 def cerrar(request):
