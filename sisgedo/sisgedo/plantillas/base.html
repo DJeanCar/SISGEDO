@@ -45,30 +45,9 @@
             </div>
         </div>
 
-        <!--<menu class= "login">    
-                {% if user.is_authenticated %}
-                <ul>
-                    <li><a id="nombre" href="/{{ user.username }}/">Hola {{user.username|capfirst}}</a></li>
-                    <li><a id="cerrar" href="/cerrar/">Cerrar &raquo;</a></li>
-                </ul>                        
-                {% else %}
-                <form action='/login/' method='post'>
-                    {% csrf_token %}
-                    <input  type="text" name="username" value="" id="username">
-                    <input  type="password" name="password" value="" id="password">
-                    <button type="submit" >Ingresar</button>
-                    <input type="hidden" name="next" value="{{ NEXT }}" />
-                </form>
-                {% endif %} 
-            </menu>-->
-
-
         <div class="container">
-
-            {% block contenido %}
-                
+            {% block contenido %}                
             {% endblock contenido %}
-
             <hr>
 
             <footer>
