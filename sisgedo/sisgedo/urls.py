@@ -11,7 +11,7 @@ urlpatterns = patterns('',
     url(r'^editar-usuario/(?P<id_usuario>\d+)$', 'principal.views.editar_usuario'),
     url(r'^ver_usuario/(?P<id_usuario>\d+)$','principal.views.ver_usuario'),
     url(r'^ver_perfiles/(?P<id_usuario>\d+)$','principal.views.ver_perfiles'),
-    url(r'^nuevo_perfil/(.+)$','principal.views.nuevo_perfil'),
+    url(r'^nuevo_perfil/(?P<id_usuario>\d+)$','principal.views.nuevo_perfil'),
 
     url(r'^ingresar/$','principal.views.ingresar'),
     url(r'^privado/$','principal.views.privado'),
