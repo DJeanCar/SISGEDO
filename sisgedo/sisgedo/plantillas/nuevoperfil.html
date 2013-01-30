@@ -2,22 +2,21 @@
 		{% csrf_token %}
 		<table>
 			<tr><th><label for="id_tipo">Tipo:</label></th>
-				<td><select name="tipo" id="id_tipo">
-				<option value="" selected="selected">---------</option>
-				<option value="operario">operario</option>
-				<option value="supervisor">supervisor</option>
-				<option value="administrador">administrador</option>
-				</select>
+				{{formulario.tipo}}
 				</td>
 			</tr>		
 			
 			<tr>
 				<th><label for="id_fecha_registro">Fecha registro:</label></th>
-				<td><input type="text" name="fecha_registro" id="id_fecha_registro" /></td>
+				<td>			
+					<input type="text" name="fecha_registro" id="id_fecha_registro">
+				</td>
 			</tr>
 			<tr>
 				<th><label for="id_fecha_vigencia">Fecha vigencia:</label></th>
-				<td><input type="text" name="fecha_vigencia" id="id_fecha_vigencia" /></td>
+				<td>
+					<input type="text" name="fecha_vigencia" id="id_fecha_vigencia">
+				</td>
 			</tr>
 			<tr>
 				<th><label for="id_estado">Estado:</label></th>
@@ -29,10 +28,11 @@
 		<br><br>
 		<div align="right">
 	      <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-	      <button type="submit" class="btn btn-primary">Registrar Usuario</button>
+	      <button type="submit" class="btn btn-primary">Registrar Perfil</button>
 	    </div>
 
 </form>
+
 <style type="text/css">
 	.datepicker {
 		z-index: 9999;
@@ -48,7 +48,3 @@
 <link rel="stylesheet" href="{{STATIC_URL}}css/datepicker.css" />
 <script src="http://code.jquery.com/jquery-1.9.0.min.js"></script>
 <script src="{{STATIC_URL}}js/bootstrap-datepicker.js"></script>
-
-<script >
-	$('.dp2').datepicker();
-</script>
