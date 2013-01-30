@@ -24,18 +24,24 @@ def registrar_usuario(request):
 		formulario = RegisterUserCreateForm()
 	return render_to_response('nuevousuario.html', {'formulario':formulario}, context_instance=RequestContext(request))
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> d75bdecbdbfe9c2596f15ec4812cfdc1b3261b8e
 def editar_usuario(request, id_usuario):
 	usuario = User.objects.get(pk = id_usuario)
 	if request.method=='POST':
-		formulario = EditarUserForm(request.POST)
+		formulario = EditarUserForm(request.POST, instance=usuario)
 		if formulario.is_valid():
 			formulario.save()
 			return HttpResponseRedirect('/usuarios')
 	else:
 		formulario = EditarUserForm(instance = usuario)
 	return render_to_response('editarusuario.html', {'formulario':formulario, 'usuario':usuario}, context_instance=RequestContext(request))
+<<<<<<< HEAD
 
+=======
+>>>>>>> d75bdecbdbfe9c2596f15ec4812cfdc1b3261b8e
 
 def ver_usuario(request, id_usuario):	
 	dato = User.objects.get(pk=id_usuario)
@@ -58,7 +64,10 @@ def nuevo_perfil(request, id_usuario):
 		formulario=PerfilForm()
 	return render_to_response('nuevoperfil.html',{'formulario':formulario, 'dato':dato}, context_instance=RequestContext(request))
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> d75bdecbdbfe9c2596f15ec4812cfdc1b3261b8e
 # login:
 def ingresar(request):	
 	if not request.user.is_anonymous():

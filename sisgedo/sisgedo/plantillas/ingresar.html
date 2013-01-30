@@ -4,9 +4,33 @@
 <h1> Gracias por su visita</h1>
 {% endblock %}
 {% block contenido%}
+
+<menu id="ingresar">  
 <form action="" id="formulario" class="form-horizontal" method="POST">
 	{% csrf_token %}
-	{{formulario}} 
-	<input type="submit" value="Ingresar">
+	
+		<legend><b><p class="tit1">Identificacion de Usuario</p></b></legend>
+	<!--{{formulario}} -->
+		<div class="control-group">
+             <div class="input-prepend">
+             <span class="add-on"><i class="icon-user"></i></span>
+           	<!-- {{formulario.username}}-->
+             <input class="span2" type="text" name="username" value="" id="username" placeholder="Usuario">
+              </div>
+        </div>
+             <br>
+        <div class="control-group">
+             <div class="input-prepend">
+              <span class="add-on"><i class="icon-lock"></i></span>
+             <input class="span2" type="password" name="password" value="" id="password" placeholder="Contraseña">
+            </div>
+        </div>
+
+		<div class="control-group">
+		    <button type="submit" class="btn btn-primary btn-medium">Ingresar</button>		
+	    </div>
+		<!--<input type="submit" class="btn btn-primary btn-medium" value="Ingresar">-->
+	
 </form>
+</menu>  
 {% endblock %}

@@ -12,7 +12,7 @@ class RegisterUserCreateForm(UserCreationForm):
         model = User
         exclude = ("is_staff", "is_superuser", "last_login", "groups", "user_permissions", "date_joined", 'password')
 
-class EditarUserForm(RegisterUserCreateForm):
+class EditarUserForm(ModelForm):
     class Meta:
         model = User
         exclude = ("is_staff", "is_superuser", "last_login", "groups", "user_permissions", "date_joined", 'password', 'password1', 'password2')
