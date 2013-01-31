@@ -17,7 +17,6 @@
     </div>
   </div>
 
-
 <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-header">      
       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -45,10 +44,14 @@
                   <td>{{dato.tipo}}</td>
                   <td>{{dato.fecha_registro}}</td>
                   <td>{{dato.fecha_vigencia}}</td>
-                  <td>{{dato.estado}}</td>
+                  <td> {% if dato.estado == 1 %}
+                      <i class="icon-ok"></i>
+                        {% else %}
+                        <i class="icon-ban-circle icon-28px"></i>
+                        {% endif %}
+                  </td>
                   <td class="center">
                    <a class="btn btn-info" data-toggle="modal" href="/editar_perfil/{{dato.id}}" data-target="#myModal2">
-                    <!--<a class="btn btn-info" href="/editar_perfil/{{dato.id}}">-->
                     <i class="icon-edit icon-white"></i>
                     </a>
               
