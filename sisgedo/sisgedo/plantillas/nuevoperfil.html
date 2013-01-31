@@ -1,42 +1,33 @@
 <form action="/nuevo_perfil/{{dato.id}}" id='formulario' method='post' >
+	<div class="row">
+		<div class="span3">
 		{% csrf_token %}
-		<table>
-			<tr><th><label for="id_tipo">Tipo:</label></th>
-				<td><select name="tipo" id="id_tipo">
-				<option value="" selected="selected">---------</option>
+				<label for="id_tipo">Tipo:</label>
+				<select name="tipo" id="id_tipo" class="span3">
+				<option value="" selected="selected">Escoge una</option>
 				<option value="operario">operario</option>
 				<option value="supervisor">supervisor</option>
 				<option value="administrador">administrador</option>
 				</select>
-				</td>
-			</tr>		
-			
-			<tr>
-				<th><label for="id_fecha_registro">Fecha registro:</label></th>
-				<td>					
-					<input class="span2 dp2" data-date-format="dd/mm/yy" name="fecha_registro" id="id_fecha_registro">
-					<!--<input type="text" name="fecha_registro" id="id_fecha_registro">-->
-				</td>
-			</tr>
-			<tr>
-				<th><label for="id_fecha_vigencia">Fecha vigencia:</label></th>
-				<td>
-					<input class="span2 dp2" data-date-format="dd/mm/yy" name="fecha_vigencia" id="id_fecha_vigencia">
-				</td>
-			</tr>
-			<tr>
-				<th><label for="id_estado">Estado:</label></th>
-				<td><input type="checkbox" name="estado" id="id_estado" />
-				</td>
-			</tr>			
-			<input type="hidden" name="usuario" id="id_usuario" value="{{dato.id}}" />
-		</table>
-		<br><br>
-		<div align="right">
-	      <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-	      <button type="submit" class="btn btn-primary">Registrar Perfil</button>
+				<br><br>		
+				<label for="id_fecha_registro">Fecha registro:</label>
+				<input class="span3 dp2" data-date-format="dd/mm/yy" name="fecha_registro" id="id_fecha_registro" placeholder="Fecha de registro" >	
+				<br><br>				
+				<label for="id_fecha_vigencia">Fecha vigencia:</label>
+				<input class="span3 dp2" data-date-format="dd/mm/yy" name="fecha_vigencia" id="id_fecha_vigencia" placeholder="Fecha de vigencia">
+				<br><br>				
+				<label for="id_estado">Estado:</label>
+				<input type="checkbox" name="estado" id="id_estado" />
+				<input type="hidden" name="usuario" id="id_usuario" value="{{dato.id}}" />		
+				<br><br><br>							
 	    </div>
+	    <div align="right" class="span3">
+			<button class="btn" data-dismiss="modal" aria-hidden="true">Salir</button>
+			<button type="submit" class="btn btn-primary">Registrar Perfil</button>
+		</div>	
 
+	</div>
+	
 </form>
 
 <style type="text/css">

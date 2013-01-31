@@ -1,6 +1,4 @@
-
-
-<form action=" " id='formulario' method='post' >
+<form action="/editar_perfil/{{perfil.id}}" id='formulario' method='post' >
 	{% csrf_token %}
 	{{ formulario }}	
 	<p><input type="submit" value='Guardar Cambios'></p>
