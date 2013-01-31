@@ -1,18 +1,43 @@
+<style>
 
+@font-face {
+    font-family: 'Dosis';
 
-  <h1>{{usuario.id}}</h1>
-  <h2>Nombre:</h2>
-  <p>{{usuario.first_name}}</p>
-  <h2>Apellido:</h2>
-  <p>{{usuario.last_name}}</p>
-  <h2>User:</h2>
-  <p>{{usuario.username}}</p>
-  <h2>Dni:</h2>
-  <p>{{usuario.dni}}</p>
-  <h2>Direccion:</h2>
-  <p>{{usuario.direccion}}</p>
-  <h2>Telefono:</h2>
-  <p>{{usuario.telefono}}</p>  
-  <h2>Email:</h2>
-  <p>{{usuario.email}}</p> 
+}
+strong { font-family:‘Dosis’, Arial, serif; font-weight: 800; font-size: 1.4em;  }
 
+</style>
+
+<div class="well">  
+  <div >
+    <strong> {{usuario.first_name}}
+     </strong>
+    <p>Nombre</p>
+  </div>
+  <div>
+    <strong>{{usuario.last_name}}</strong>
+    <p>Apellido</p>
+  </div>
+  <div>
+    <strong>{{usuario.username}}</strong>
+    <p>User</p>
+  </div>
+  <div>
+    <strong>{{usuario.dni}}</strong>
+    <p>DNI</p>
+  </div>
+  <div>
+    <strong>{{usuario.direccion}}</strong>
+    <p>Direccion</p>
+  </div>
+  <div>
+    <strong>{{usuario.telefono}}</strong>
+    <p>Teléfono</p>
+  </div>
+  <div>
+    <strong>{{usuario.email}}</strong>
+    <p>Email</p>
+  </div>
+      
+
+</div>

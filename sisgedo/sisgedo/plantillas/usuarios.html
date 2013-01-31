@@ -1,12 +1,8 @@
 {% extends "base.html" %}
 {% block titulo %}
-	Usuarios
+Usuarios
 {% endblock titulo %}
 {% block contenido %}
-<<<<<<< HEAD
-=======
-
->>>>>>> 9be98dfb3ef9452e8bfcd913ee1fe463923894ec
 <div class="box-header" data-original-title>
   <h2><i class="icon-user"></i><span class="break"></span>Usuarios</h2>
   <div class="box-icon">
@@ -34,13 +30,15 @@
           <td>{{usuario.dni}}</td>
           <td class="center">
             <a data-toggle="modal" class="btn btn-success" href="/ver_usuario/{{usuario.id}}" data-target="#myModal">
-              <i class="icon-zoom-in icon-white"></i> 
+               <!--<a class="btn btn-sucess" href="/ver_usuario/{{usuario.id}}"-->
+              <i class="icon-zoom-in icon-white"></i>
             </a>
             <a class="btn btn-info" href="/editar-usuario/{{usuario.id}}">
               <i class="icon-edit icon-white"></i>
             </a>
-            <a class="btn btn-danger" href="/ver_perfiles/{{usuario.id}}">
+            <a class="btn btn-danger" href="/usuarios/{{usuario.id}}/perfiles">
               <i class="icon-user icon-white"></i>
+            </a>
           </td> 
         </tr>
         {% endfor %}
@@ -54,8 +52,9 @@
       <h3 id="myModalLabel">Datos de Usuario</h3>
     </div>
     <div class="modal-body">  
-      
+    </div>    
+    <div class="modal-footer">
+      <a href="#" class="btn btn-primary">Salir</a>
     </div>
-    
 </div>
 {% endblock contenido %}

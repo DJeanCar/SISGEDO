@@ -7,11 +7,12 @@ from django.template import RequestContext
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
-from principal.forms import PerfilForm, EditarUserForm
+from principal.forms import PerfilForm, EditarUserForm, EditarPerfilForm
 
 def lista_usuarios(request):
 	usuarios = User.objects.all()
 	return render_to_response('usuarios.html', {'usuarios':usuarios}, context_instance=RequestContext(request))
+
 
 def registrar_usuario(request):
 	if request.method=='POST':
@@ -24,10 +25,7 @@ def registrar_usuario(request):
 		formulario = RegisterUserCreateForm()
 	return render_to_response('nuevousuario.html', {'formulario':formulario}, context_instance=RequestContext(request))
 
-<<<<<<< HEAD
 
-=======
->>>>>>> d75bdecbdbfe9c2596f15ec4812cfdc1b3261b8e
 def editar_usuario(request, id_usuario):
 	usuario = User.objects.get(pk = id_usuario)
 	if request.method=='POST':
@@ -38,15 +36,21 @@ def editar_usuario(request, id_usuario):
 	else:
 		formulario = EditarUserForm(instance = usuario)
 	return render_to_response('editarusuario.html', {'formulario':formulario, 'usuario':usuario}, context_instance=RequestContext(request))
-<<<<<<< HEAD
 
-=======
->>>>>>> d75bdecbdbfe9c2596f15ec4812cfdc1b3261b8e
+def editar_perfil(request, id_perfil):
+	perfil = PerfilUsuario.objects.get(id = id_perfil)
+ 	if request.method=='POST':
+		formulario = EditarPerfilForm(request.POST, instance=perfil)
+		if formulario.is_valid():
+			formulario.save()
+			return HttpResponseRedirect('/usuarios/%s/perfiles' %perfil.usuario_id)
+	else:
+		formulario = EditarPerfilForm(instance = perfil)
+	return render_to_response('editar_perfil.html', {'formulario':formulario, 'perfil':perfil}, context_instance=RequestContext(request))
 
 def ver_usuario(request, id_usuario):	
 	dato = User.objects.get(pk=id_usuario)
-	dato2 = PerfilUsuario.objects.filter(usuario=id_usuario)
-	return render_to_response('ver_usuario.html',{'usuario':dato,'verPerfil':dato2},context_instance = RequestContext(request))
+	return render_to_response('ver_usuario.html',{'usuario':dato},context_instance = RequestContext(request))
 
 def ver_perfiles(request, id_usuario):	
 	dato2 = PerfilUsuario.objects.filter(usuario=id_usuario)
@@ -59,15 +63,12 @@ def nuevo_perfil(request, id_usuario):
 		formulario=PerfilForm(request.POST)
 		if formulario.is_valid():
 			formulario.save()
-			return HttpResponseRedirect('/usuarios')
+			return HttpResponseRedirect('/usuarios/%s/perfiles' %id_usuario)
 	else: 
 		formulario=PerfilForm()
 	return render_to_response('nuevoperfil.html',{'formulario':formulario, 'dato':dato}, context_instance=RequestContext(request))
 
-<<<<<<< HEAD
 
-=======
->>>>>>> d75bdecbdbfe9c2596f15ec4812cfdc1b3261b8e
 # login:
 def ingresar(request):	
 	if not request.user.is_anonymous():
