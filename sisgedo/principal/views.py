@@ -8,6 +8,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from principal.forms import PerfilForm, EditarUserForm
+import json
 
 def lista_usuarios(request):
 	usuarios = User.objects.all()
@@ -33,7 +34,7 @@ def editar_usuario(request, id_usuario):
 			return HttpResponseRedirect('/usuarios')
 	else:
 		formulario = EditarUserForm(instance = usuario)
-	return render_to_response('editarusuario.html', {'formulario':formulario, 'usuario':usuario}, context_instance=RequestContext(request))
+	return render_to_response('editar-usuario.html', {'formulario':formulario, 'usuario':usuario}, context_instance=RequestContext(request))
 
 def ver_usuario(request, id_usuario):	
 	dato = User.objects.get(pk=id_usuario)
@@ -87,3 +88,44 @@ def privado(request):
 def cerrar(request):
 	logout(request)
 	return HttpResponseRedirect('/cerrar')
+
+def get_name(request):
+	if request.is_ajax():
+		results = []
+		q = request.GET.get('term', '') #jquery-ui.autocomplete parameter
+		name_list = User.objects.filter(username__startswith = q ).values('username')
+
+		for name in name_list:
+			name_json = {}
+			name_json['id'] = name['username']
+			name_json['label'] = name['username']
+			name_json['value'] = name['username']
+			results.append(name_json)
+			data = json.dumps(results)
+	else:
+		data = 'fail'
+
+	mimetype = 'application/json'
+	return HttpResponse(data, mimetype)
+
+def autocomplete(request):
+	return render_to_response('autocomplete.html', context_instance=RequestContext(request))
+
+def check(request):
+	if request.is_ajax():
+		if User.objects.get(username = request.POST ):
+			data = 'SI'
+	else:
+		data = 'NO'
+	mimetype = 'application/json'
+	return HttpResponse(data, mimetype)
+
+def comprobar(request):
+	return render_to_response('check.html', context_instance=RequestContext(request))
+
+def xhr_test(request):
+    if request.is_ajax():
+        message = "Hello AJAX"
+    else:
+        message = "Hello"
+    return HttpResponse(message)

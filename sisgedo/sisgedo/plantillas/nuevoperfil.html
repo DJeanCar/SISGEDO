@@ -9,13 +9,13 @@
 			<tr>
 				<th><label for="id_fecha_registro">Fecha registro:</label></th>
 				<td>			
-					<input type="text" name="fecha_registro" id="id_fecha_registro">
+					<input type="text" name="fecha_registro" data-date-format="dd/mm/yy" class="dp2 span2" id="id_fecha_registro">
 				</td>
 			</tr>
 			<tr>
 				<th><label for="id_fecha_vigencia">Fecha vigencia:</label></th>
 				<td>
-					<input type="text" name="fecha_vigencia" id="id_fecha_vigencia">
+					<input type="text" name="fecha_vigencia" data-date-format="dd/mm/yy" class="dp2 span2" id="id_fecha_vigencia">
 				</td>
 			</tr>
 			<tr>
@@ -48,3 +48,6 @@
 <link rel="stylesheet" href="{{STATIC_URL}}css/datepicker.css" />
 <script src="http://code.jquery.com/jquery-1.9.0.min.js"></script>
 <script src="{{STATIC_URL}}js/bootstrap-datepicker.js"></script>
+<script type="text/javascript">
+	$('.dp2').datepicker()
+</script>

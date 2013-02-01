@@ -6,7 +6,8 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     url(r'^usuarios/$', 'principal.views.lista_usuarios'),
-	url(r'^registrar/usuario/$', 'principal.views.registrar_usuario'),
+	url(r'^usuarios/registrar/$', 'principal.views.registrar_usuario'),
+    url(r'^usuarios/editar/(?P<id_usuario>\d+)$', 'principal.views.editar_usuario'),
 
     url(r'^editar-usuario/(?P<id_usuario>\d+)$', 'principal.views.editar_usuario'),
     url(r'^ver_usuario/(?P<id_usuario>\d+)$','principal.views.ver_usuario'),
@@ -22,4 +23,9 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
+
+    url(r'^get_name/', 'principal.views.get_name', name='get_name'),
+    url(r'^autocomplete/', 'principal.views.autocomplete'),
+    url(r'^check/', 'principal.views.check', name='check'),
+    url(r'^comprobar/', 'principal.views.comprobar'),
 )

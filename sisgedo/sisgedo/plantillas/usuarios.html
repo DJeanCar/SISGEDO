@@ -7,7 +7,7 @@
   <h2><i class="icon-user"></i><span class="break"></span>Usuarios</h2>
   <div class="box-icon">
     <span class="break"></span>
-    <a href="/registrar/usuario/"><i class="icon-user"></i>Nuevo Usuario</a>
+    <a href="registrar/"><i class="icon-user"></i>Nuevo Usuario</a>
   </div>
 </div>
 <div class="box-content">
@@ -32,7 +32,7 @@
             <a data-toggle="modal" class="btn btn-success" href="/ver_usuario/{{usuario.id}}" data-target="#myModal">
               <i class="icon-zoom-in icon-white"></i> 
             </a>
-            <a class="btn btn-info" href="/editar-usuario/{{usuario.id}}">
+            <a class="btn btn-info" href="/editar-usuario/{{usuario.id}}" data-toggle="modal" data-target="#editarModal">
               <i class="icon-edit icon-white"></i>
             </a>
             <a class="btn btn-danger" href="/ver_perfiles/{{usuario.id}}">
@@ -45,6 +45,17 @@
  </div> 
 
 <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">      
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <h3 id="myModalLabel">Datos de Usuario</h3>
+    </div>
+    <div class="modal-body">  
+      
+    </div>
+    
+</div>
+
+<div id="editarModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-header">      
       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
       <h3 id="myModalLabel">Datos de Usuario</h3>
