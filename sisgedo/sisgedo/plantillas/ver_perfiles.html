@@ -46,12 +46,9 @@
                   <td>{{dato.fecha_vigencia}}</td>
                  
                   <td> 
-
-                    {% if dato.estado == 1 %}
-                    <input type="checkbox" name="estado" id="id_estado" value="{{dato.id}}"checked="checked"/>
-                    {% else %}
-                    <input type="checkbox" name="estado"  id="id_estado" value="{{dato.id}}" >
-                    {% endif %}
+                   
+                    <input type="checkbox" name="estado" id="id_estado" value="{{dato.id}}">
+                   
 
                   </td>
                   <td class="center">
@@ -67,7 +64,7 @@
                      
 </div>
 
-<div id="log"></div>
+
 
 <div id="myModal2" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-header">      
@@ -84,17 +81,11 @@
   $( "input[type=checkbox]" ).on( "click", evento);
 
   function evento() 
-  {
+  {  
+   var id_perfil= $("input:checked").val() ;
   
-    var id_perfil=$("#id_estado").val()
-    /*var estado=$("#id_estado").name()*/
-      $.ajax({
-        
-        data:{"id_perfil_edit":id_perfil},
-        type:"post",
-        url:'/edit_estado/',
-      });     
-  }
+    console.log(id_perfil)
+   }
 
 
 
