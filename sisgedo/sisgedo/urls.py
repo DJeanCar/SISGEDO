@@ -16,12 +16,12 @@ urlpatterns = patterns('',
     url(r'^privado/$','principal.views.privado'),
     url(r'^cerrar/$', 'principal.views.cerrar'),
     
-    #url(r'^ajax/$', 'principal.views.ajax'),
-    #url(r'^probandoajax/$', 'principal.views.probandoajax'),
+    url(r'^ajax/$', 'principal.views.ajax'),
+    url(r'^probandoajax/$', 'principal.views.probandoajax'),
+    url(r'^edit_estado/$', 'principal.views.edit_estado'),
     
     url(r'^editar_perfil/(?P<id_perfil>\d+)$', 'principal.views.editar_perfil'),
-
-    # Uncomment the admin/doc line below to enable admin documentation:
+    # Uncomment the admi/doc line below to enable admin documentation:
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
     # Uncomment the next line to enable the admin:

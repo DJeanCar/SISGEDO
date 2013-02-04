@@ -26,6 +26,13 @@ class EditarPerfilForm(ModelForm):
         model = PerfilUsuario
         exclude=("usuario_id")
 
+class EditarEstado(ModelForm):
+    class Meta:
+        model = PerfilUsuario
+        exclude=("usuario_id","tipo","fecha_vigencia","fecha_registro")
+
+
+
 
         
 

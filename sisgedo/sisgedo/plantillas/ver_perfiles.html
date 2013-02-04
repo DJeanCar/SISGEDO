@@ -44,18 +44,13 @@
                   <td>{{dato.tipo}}</td>
                   <td>{{dato.fecha_registro}}</td>
                   <td>{{dato.fecha_vigencia}}</td>
-                  <!--<td> {% if dato.estado == 1 %}
-                      <i class="icon-ok"></i>
-                        {% else %}
-                      <i class="icon-ban-circle icon-28px"></i>
-                        {% endif %}
-                  </td>-->
+                 
                   <td> 
-                   
+
                     {% if dato.estado == 1 %}
-                    <input type="checkbox" name="estado" id="id_estado" checked/>
+                    <input type="checkbox" name="estado" id="id_estado" value="{{dato.id}}"checked="checked"/>
                     {% else %}
-                    <input name="estado" id="id_estado" type="checkbox">
+                    <input type="checkbox" name="estado"  id="id_estado" value="{{dato.id}}" >
                     {% endif %}
 
                   </td>
@@ -72,6 +67,8 @@
                      
 </div>
 
+<div id="log"></div>
+
 <div id="myModal2" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-header">      
       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -81,7 +78,54 @@
     </div>    
 </div>
 
+<script src="http://code.jquery.com/jquery-1.9.0.min.js"></script>
 
+<script>
+  $( "input[type=checkbox]" ).on( "click", evento);
+
+  function evento() 
+  {
+  
+    var id_perfil=$("#id_estado").val()
+    /*var estado=$("#id_estado").name()*/
+      $.ajax({
+        
+        data:{"id_perfil_edit":id_perfil},
+        type:"post",
+        url:'/edit_estado/',
+      });     
+  }
+
+
+
+$(document).on("ready", setup);
+  function setup(){
+    $.ajaxSetup({
+      beforeSend: function(xhr, settings) {
+        function getCookie(name) {
+          var cookieValue = null;
+            if (document.cookie && document.cookie != '') {
+              var cookies = document.cookie.split(';');
+                for (var i = 0; i < cookies.length; i++) {
+                  var cookie = jQuery.trim(cookies[i]);
+                  // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                    }
+                }
+            }
+        return cookieValue;
+        }
+        if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
+      // Only send the token to relative URLs i.e. locally.
+          xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+        }
+      }
+    });
+  }
+
+</script>
 
 {% endblock %}
  

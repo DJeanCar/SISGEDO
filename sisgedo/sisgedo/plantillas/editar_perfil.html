@@ -15,12 +15,13 @@
 	<input class="span3 dp2 valida" data-date-format="dd/mm/yy" name="fecha_vigencia" id="id_fecha_vigencia" placeholder="Fecha de vigencia" >	
 	<label for="id_estado">Estado:</label>
 	{% if perfil.estado == 1 %}
-        <input type="checkbox" name="estado" id="id_estado" checked/>
+        <input type="checkbox" name="estado" id="id_estado" checked="checked"/>
     {% else %}
-        <input name="estado" id="id_estado" type="checkbox">
+        <input type="checkbox" name="estado" id="id_estado" >
     {% endif %}
 		<p><input value="Guardar Cambios" type="submit"></p>
 </form>
+
 
 <style type="text/css">
 	.datepicker {
@@ -39,8 +40,8 @@
 <script src="{{STATIC_URL}}js/bootstrap-datepicker.js"></script>
 
 <script >
-	$('.dp2').datepicker();
-	
+	$('.dp2').datepicker();	
 </script>
+
 
 	
