@@ -11,20 +11,11 @@
     <h2><i class="icon-user"></i><span class="break"></span>Perfiles de Usuario</h2>
     <div class="box-icon">
       <span class="break"></span>
-      <a data-toggle="modal" href="/nuevo_perfil/{{usuario.id}}" data-target="#myModal"><i class="icon-plus-sign" ></i>
+      <a data-toggle="modal" href="/nuevo_perfil/{{usuario.id}}" data-target="#myModal1"><i class="icon-plus-sign" ></i>
       <span class="break"></span>Nuevo</a>  
  
     </div>
   </div>
-
-<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-header">      
-      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-      <h3 id="myModalLabel">Crear Nuevo Perfil</h3>
-    </div>
-    <div class="modal-body">
-    </div>
-</div>
 
 <div class="box-content">
 
@@ -46,21 +37,27 @@
                   <td>{{dato.fecha_vigencia}}</td>
                  
                   <td> 
-                   
-                    <input type="checkbox" name="estado" id="id_estado" value="{{dato.id}}">
-                   
+
+                    <form action="">
+                      {% if dato.estado == 1 %}
+                    <input type="checkbox" name="estado-{{dato.id}}" id="id_estado-{{dato.id}}" value="{{dato.id}}" checked="checked"/>
+                    {% else %}
+                    <input type="checkbox" name="estado-{{dato.id}}" id="id_estado-{{dato.id}}" value="{{dato.id}}">
+                    {% endif %}
+                    </form>
+
 
                   </td>
                   <td class="center">
                    <a class="btn btn-info" data-toggle="modal" href="/editar_perfil/{{dato.id}}" data-target="#myModal2">
                     <i class="icon-edit icon-white"></i>
                     </a>
-              
+                    <input type="text" value="{{dato.id}}" id="idPerfil-{{dato.id}}">
                   </td>
                 </tr>
                 {% endfor %}
               </tbody>
-            </table>   
+            </table> 
                      
 </div>
 
@@ -78,17 +75,8 @@
 <script src="http://code.jquery.com/jquery-1.9.0.min.js"></script>
 
 <script>
-  $( "input[type=checkbox]" ).on( "click", evento);
 
-  function evento() 
-  {  
-   var id_perfil= $("input:checked").val() ;
-  
-    console.log(id_perfil)
-   }
-
-
-
+$(document).on("ready", inicio);
 $(document).on("ready", setup);
   function setup(){
     $.ajaxSetup({
@@ -115,6 +103,22 @@ $(document).on("ready", setup);
       }
     });
   }
+
+function inicio()
+{
+  $( "input[type=checkbox]" ).on( "change", evento);
+}
+function evento()
+{
+    var id_perfil = $( this ).on( "click").val();
+    /*var estado=$("#id_estado").name()*/
+      $.ajax({
+       // data:{id_perfil_edit:id_perfil},
+        type:"post",
+        url:'/edit_estado/',
+      });
+    console.log(id_perfil);
+}
 
 </script>
 
