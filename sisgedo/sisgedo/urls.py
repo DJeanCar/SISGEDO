@@ -18,8 +18,12 @@ urlpatterns = patterns('',
     url(r'^ingresar/$','principal.views.ingresar'),
     url(r'^privado/$','principal.views.privado'),
     url(r'^cerrar/$', 'principal.views.cerrar'),
+    
+    url(r'^ajax/$', 'principal.views.ajax'),
+    url(r'^probandoajax/$', 'principal.views.probandoajax'),
+    url(r'^edit_estado/$', 'principal.views.edit_estado'),
+    
     url(r'^editar_perfil/(?P<id_perfil>\d+)$', 'principal.views.editar_perfil'),
-
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^admin/', include(admin.site.urls)),
 

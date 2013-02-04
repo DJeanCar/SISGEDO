@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>Probando Ajax</title>
+	   <script src="http://code.jquery.com/jquery-1.9.0.min.js"></script>
+	   <script>
+	   	$(document).on("ready",inicio);
+		   	function inicio()
+		   	{
+		   	$("#id").on("keyup",evento);
+		   	}
+		
+	   	function evento()
+	   	{
+	    var id=$("#id").val()
+	   	$.ajax({
+	   		data:{"id_buscar":id},
+	   		type:"get",
+	   		url:'/ajax/',
+	   		success:function(data)
+	   		{
+	   		$("#resultados").append(data);
+	   		}
+	   	});	
+	   	}
+
+	   </script>
+</head>
+<body>
+<div id="resultados"></div>
+<input type="text" id="id"></div>
+
+</body>
+</html>
+

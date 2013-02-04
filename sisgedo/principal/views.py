@@ -9,6 +9,7 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from principal.forms import PerfilForm, EditarUserForm, EditarPerfilForm
 import json
+from principal.forms import PerfilForm, EditarUserForm, EditarPerfilForm, EditarEstado
 
 def home(request):
 	return render_to_response('home.html', context_instance=RequestContext(request))
@@ -114,7 +115,21 @@ def ajax_username(request):
 #	usuario=User.objects.get(pk=clave)
 #	return HttpResponse(usuario.username)
 
-#def probandoajax(request):
-#	return render_to_response("probando_Ajax.html",context_instance=RequestContext(request))
+def ajax(request):
+	clave=request.GET["id_buscar"]
+	usuario=User.objects.get(pk=clave)
+	return HttpResponse(usuario.username)
+
+def edit_estado(request):
+	clave=request.GET["id_perfil_edit"]
+	perfil = PerfilUsuario.objects.get(id = clave)
+	if request.method=='POST':
+		formulario = EditarEstado(request.POST, instance=perfil)
+		if formulario.is_valid():
+			formulario.save()
+			return HttpResponseRedirect('/usuarios/%s/perfiles' %perfil.usuario_id)
+	
+def probandoajax(request):
+	return render_to_response("probando_Ajax.html",context_instance=RequestContext(request))
 
 
