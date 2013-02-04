@@ -123,11 +123,25 @@ def ajax(request):
 def edit_estado(request):
 	clave=request.POST["id_perfil_edit"]
 	perfil = PerfilUsuario.objects.get(pk = clave)
+<<<<<<< HEAD
 	if request.method=='POST':
 		formulario = EditarEstado(request.POST, instance=perfil)
 		if formulario.is_valid():
 			formulario.save()
 			return HttpResponseRedirect('/usuarios/%s/perfiles' %perfil.usuario_id)
+=======
+	if perfil.estado == True:
+		perfil.estado = False
+	else:
+		perfil.estado = True
+	perfil.save()
+	return HttpResponse(estado)
+	#if request.method=='POST':
+	#	formulario = EditarEstado(request.POST, instance=perfil)
+	#	if formulario.is_valid():
+	#		formulario.save()
+	#		return HttpResponseRedirect('/usuarios/%s/perfiles' %perfil.usuario_id)
+>>>>>>> 8bd056f46c48b9277a8b75f9df34a657f764e968
 	
 def probandoajax(request):
 	return render_to_response("probando_Ajax.html",context_instance=RequestContext(request))
