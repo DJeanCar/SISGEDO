@@ -21,9 +21,11 @@ class PerfilForm(ModelForm):
 	class Meta:
 		model=PerfilUsuario
 
-class EditarPerfilForm(forms.ModelForm):
+class EditarPerfilForm(ModelForm):
     class Meta:
         model = PerfilUsuario
+        exclude=("usuario_id")
+
 
         
 

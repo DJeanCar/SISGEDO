@@ -10,7 +10,8 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
         <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/normalize.css">
-        <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/bootstrap.min.css">          
+        <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/bootstrap.min.css">
+        <link href='http://fonts.googleapis.com/css?family=Dosis:800' rel='stylesheet' type='text/css'>       
         <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/bootstrap-responsive.min.css">
         <link rel="stylesheet" href="{{STATIC_URL}}css/datepicker.css" />
         <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/main.css">
@@ -22,6 +23,7 @@
             img {
                 width: 150px;
             }
+            
         </style>
     </head>
     <body>       
@@ -74,10 +76,13 @@
             s.parentNode.insertBefore(g,s)}(document,'script'));
         </script>  
         <script type="text/javascript">
-            $("a").click(function() {
-                console.log("Handler for .click() called.");
-            });
-            $("#verusuarioenlace").removeData();
+            function reloadURL() {
+            window.location.reload();
+            }
+            /*funcion que recarga ventana padre cuando la ventana hija(modal) se ha activado */
+            $('#myModal').on('hidden',function(){
+                window.location.reload();
+            })
         </script>
 
     </body>

@@ -5,7 +5,6 @@
 {% endblock titulo %}
 
 {% block contenido %}
-
     <form action="" id="formulario" class="form-horizontal" method="POST">
     	{% csrf_token %}
     	{{formulario.as_p}}
@@ -15,3 +14,4 @@
 	    </div>
     </form>
 {% endblock contenido %}
+

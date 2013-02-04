@@ -7,12 +7,12 @@ from django.template import RequestContext
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
-from principal.forms import PerfilForm, EditarUserForm
-import json
+from principal.forms import PerfilForm, EditarUserForm, EditarPerfilForm
 
 def lista_usuarios(request):
 	usuarios = User.objects.all()
 	return render_to_response('usuarios.html', {'usuarios':usuarios}, context_instance=RequestContext(request))
+
 
 def registrar_usuario(request):
 	if request.method=='POST':
@@ -36,10 +36,20 @@ def editar_usuario(request, id_usuario):
 		formulario = EditarUserForm(instance = usuario)
 	return render_to_response('editar-usuario.html', {'formulario':formulario, 'usuario':usuario}, context_instance=RequestContext(request))
 
+def editar_perfil(request, id_perfil):
+	perfil = PerfilUsuario.objects.get(id = id_perfil)
+ 	if request.method=='POST':
+		formulario = EditarPerfilForm(request.POST, instance=perfil)
+		if formulario.is_valid():
+			formulario.save()
+			return HttpResponseRedirect('/usuarios/%s/perfiles' %perfil.usuario_id)
+	else:
+		formulario = EditarPerfilForm(instance = perfil)
+	return render_to_response('editar_perfil.html', {'formulario':formulario, 'perfil':perfil}, context_instance=RequestContext(request))
+
 def ver_usuario(request, id_usuario):	
 	dato = User.objects.get(pk=id_usuario)
-	dato2 = PerfilUsuario.objects.filter(usuario=id_usuario)
-	return render_to_response('ver_usuario.html',{'usuario':dato,'verPerfil':dato2},context_instance = RequestContext(request))
+	return render_to_response('ver_usuario.html',{'usuario':dato},context_instance = RequestContext(request))
 
 def ver_perfiles(request, id_usuario):	
 	dato2 = PerfilUsuario.objects.filter(usuario=id_usuario)
@@ -52,7 +62,7 @@ def nuevo_perfil(request, id_usuario):
 		formulario=PerfilForm(request.POST)
 		if formulario.is_valid():
 			formulario.save()
-			return HttpResponseRedirect('/usuarios')
+			return HttpResponseRedirect('/usuarios/%s/perfiles' %id_usuario)
 	else: 
 		formulario=PerfilForm()
 	return render_to_response('nuevoperfil.html',{'formulario':formulario, 'dato':dato}, context_instance=RequestContext(request))
@@ -88,44 +98,3 @@ def privado(request):
 def cerrar(request):
 	logout(request)
 	return HttpResponseRedirect('/cerrar')
-
-def get_name(request):
-	if request.is_ajax():
-		results = []
-		q = request.GET.get('term', '') #jquery-ui.autocomplete parameter
-		name_list = User.objects.filter(username__startswith = q ).values('username')
-
-		for name in name_list:
-			name_json = {}
-			name_json['id'] = name['username']
-			name_json['label'] = name['username']
-			name_json['value'] = name['username']
-			results.append(name_json)
-			data = json.dumps(results)
-	else:
-		data = 'fail'
-
-	mimetype = 'application/json'
-	return HttpResponse(data, mimetype)
-
-def autocomplete(request):
-	return render_to_response('autocomplete.html', context_instance=RequestContext(request))
-
-def check(request):
-	if request.is_ajax():
-		if User.objects.get(username = request.POST ):
-			data = 'SI'
-	else:
-		data = 'NO'
-	mimetype = 'application/json'
-	return HttpResponse(data, mimetype)
-
-def comprobar(request):
-	return render_to_response('check.html', context_instance=RequestContext(request))
-
-def xhr_test(request):
-    if request.is_ajax():
-        message = "Hello AJAX"
-    else:
-        message = "Hello"
-    return HttpResponse(message)

@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block titulo %}
-	Usuarios
+Usuarios
 {% endblock titulo %}
 {% block contenido %}
 <div class="box-header" data-original-title>
@@ -30,13 +30,15 @@
           <td>{{usuario.dni}}</td>
           <td class="center">
             <a data-toggle="modal" class="btn btn-success" href="/ver_usuario/{{usuario.id}}" data-target="#myModal">
-              <i class="icon-zoom-in icon-white"></i> 
+               <!--<a class="btn btn-sucess" href="/ver_usuario/{{usuario.id}}"-->
+              <i class="icon-zoom-in icon-white"></i>
             </a>
             <a class="btn btn-info" href="/editar-usuario/{{usuario.id}}" data-toggle="modal" data-target="#editarModal">
               <i class="icon-edit icon-white"></i>
             </a>
-            <a class="btn btn-danger" href="/ver_perfiles/{{usuario.id}}">
+            <a class="btn btn-danger" href="/usuarios/{{usuario.id}}/perfiles">
               <i class="icon-user icon-white"></i>
+            </a>
           </td> 
         </tr>
         {% endfor %}
@@ -50,9 +52,10 @@
       <h3 id="myModalLabel">Datos de Usuario</h3>
     </div>
     <div class="modal-body">  
-      
+    </div>    
+    <div class="modal-footer">
+      <button class="btn" data-dismiss="modal" aria-hidden="true">Salir</button>
     </div>
-    
 </div>
 
 <div id="editarModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
