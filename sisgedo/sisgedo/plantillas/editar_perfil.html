@@ -1,7 +1,46 @@
-<form action="/editar_perfil/{{perfil.id}}" id='formulario' method='post' >
+<form action="/editar_perfil/{{perfil.id}}" id="formulario" method="post">
 	{% csrf_token %}
-	{{ formulario }}	
-	<p><input type="submit" value='Guardar Cambios'></p>
+	<label for="id_tipo">Tipo:</label>
+		<select name="tipo" id="id_tipo" >
+		<option value="">---------</option>
+		<option value="operario">operario</option>
+		<option value="supervisor">supervisor</option>
+		<option value="administrador">administrador</option>
+		</select>
+
+	<label for="id_fecha_registro">Fecha registro:</label>
+	<input class="span3 dp2 valida" data-date-format="dd/mm/yy" name="fecha_registro" id="id_fecha_registro" placeholder="Fecha de registro" >	
+
+	<label for="id_fecha_vigencia">Fecha vigencia:</label>
+	<input class="span3 dp2 valida" data-date-format="dd/mm/yy" name="fecha_vigencia" id="id_fecha_vigencia" placeholder="Fecha de vigencia" >	
+	<label for="id_estado">Estado:</label>
+	{% if perfil.estado == 1 %}
+        <input type="checkbox" name="estado" id="id_estado" checked/>
+    {% else %}
+        <input name="estado" id="id_estado" type="checkbox">
+    {% endif %}
+		<p><input value="Guardar Cambios" type="submit"></p>
 </form>
+
+<style type="text/css">
+	.datepicker {
+		z-index: 9999;
+		top: 0;
+		left: 0;
+		padding: 4px;
+		margin-top: 1px;
+		-webkit-border-radius: 4px;
+		-moz-border-radius: 4px;
+		border-radius: 4px;
+	}
+</style>
+<link rel="stylesheet" href="{{STATIC_URL}}css/datepicker.css" />
+<script src="http://code.jquery.com/jquery-1.9.0.min.js"></script>
+<script src="{{STATIC_URL}}js/bootstrap-datepicker.js"></script>
+
+<script >
+	$('.dp2').datepicker();
+	
+</script>
 
 	

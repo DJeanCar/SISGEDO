@@ -44,11 +44,20 @@
                   <td>{{dato.tipo}}</td>
                   <td>{{dato.fecha_registro}}</td>
                   <td>{{dato.fecha_vigencia}}</td>
-                  <td> {% if dato.estado == 1 %}
+                  <!--<td> {% if dato.estado == 1 %}
                       <i class="icon-ok"></i>
                         {% else %}
-                        <i class="icon-ban-circle icon-28px"></i>
+                      <i class="icon-ban-circle icon-28px"></i>
                         {% endif %}
+                  </td>-->
+                  <td> 
+                   
+                    {% if dato.estado == 1 %}
+                    <input type="checkbox" name="estado" id="id_estado" checked/>
+                    {% else %}
+                    <input name="estado" id="id_estado" type="checkbox">
+                    {% endif %}
+
                   </td>
                   <td class="center">
                    <a class="btn btn-info" data-toggle="modal" href="/editar_perfil/{{dato.id}}" data-target="#myModal2">
@@ -59,7 +68,8 @@
                 </tr>
                 {% endfor %}
               </tbody>
-            </table>            
+            </table>   
+                     
 </div>
 
 <div id="myModal2" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -71,6 +81,8 @@
     </div>    
 </div>
 
-{% endblock %}
 
+
+{% endblock %}
+ 
 

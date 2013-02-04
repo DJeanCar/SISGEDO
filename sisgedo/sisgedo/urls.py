@@ -16,6 +16,9 @@ urlpatterns = patterns('',
     url(r'^privado/$','principal.views.privado'),
     url(r'^cerrar/$', 'principal.views.cerrar'),
     
+    #url(r'^ajax/$', 'principal.views.ajax'),
+    #url(r'^probandoajax/$', 'principal.views.probandoajax'),
+    
     url(r'^editar_perfil/(?P<id_perfil>\d+)$', 'principal.views.editar_perfil'),
 
     # Uncomment the admin/doc line below to enable admin documentation:

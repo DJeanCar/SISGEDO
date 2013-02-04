@@ -100,3 +100,13 @@ def privado(request):
 def cerrar(request):
 	logout(request)
 	return HttpResponseRedirect('/cerrar')
+
+#def ajax(request):
+#	clave=request.GET["id_buscar"]
+#	usuario=User.objects.get(pk=clave)
+#	return HttpResponse(usuario.username)
+
+#def probandoajax(request):
+#	return render_to_response("probando_Ajax.html",context_instance=RequestContext(request))
+
+
