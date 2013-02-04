@@ -8,11 +8,14 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from principal.forms import PerfilForm, EditarUserForm, EditarPerfilForm
+import json
+
+def home(request):
+	return render_to_response('home.html', context_instance=RequestContext(request))
 
 def lista_usuarios(request):
 	usuarios = User.objects.all()
 	return render_to_response('usuarios.html', {'usuarios':usuarios}, context_instance=RequestContext(request))
-
 
 def registrar_usuario(request):
 	if request.method=='POST':
@@ -98,3 +101,20 @@ def privado(request):
 def cerrar(request):
 	logout(request)
 	return HttpResponseRedirect('/cerrar')
+
+def ajax_username(request):
+	ids = request.GET['clave']
+	usuario = User.objects.get(username = ids)
+	results = usuario.username
+	data = json.dumps(results)
+	mimetype = 'application/json'
+	return HttpResponse(data, mimetype)
+#def ajax(request):
+#	clave=request.GET["id_buscar"]
+#	usuario=User.objects.get(pk=clave)
+#	return HttpResponse(usuario.username)
+
+#def probandoajax(request):
+#	return render_to_response("probando_Ajax.html",context_instance=RequestContext(request))
+
+

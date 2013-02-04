@@ -8,10 +8,39 @@
     <form action="" id="formulario" class="form-horizontal" method="POST">
     	{% csrf_token %}
     	{{formulario.as_p}}
+    	<p>
+    		<label for="id_username">Nombre de usuario:</label>
+    		<input id="id_username" type="text" name="username" maxlength="30" />
+    		<span id="validacion" class="helptext"></span>
+    	</p>
+		<p>
+			<label for="id_first_name">Nombre propio:</label>
+			<input id="id_first_name" type="text" name="first_name" maxlength="30" />
+		</p>
+		<p>
+			<label for="id_last_name">Apellidos:</label>
+			<input id="id_last_name" type="text" name="last_name" maxlength="30" />
+		</p>
+		<p>
+			<label for="id_email">Dirección de correo electrónico:</label>
+			<input id="id_email" type="text" name="email" maxlength="75" />
+		</p>
+		<p>
+			<label for="id_is_active">Activo:</label> 
+			<input checked="checked" type="checkbox" name="is_active" id="id_is_active" /> 
+			<span class="helptext"></span>
+		</p>
+		<p>
+			<label for="id_direccion">Direccion:</label>
+			<input id="id_direccion" type="text" name="direccion" maxlength="500" />
+		</p>
+		<p>
+			<label for="id_telefono">Telefono:</label>
+			<input type="text" name="telefono" id="id_telefono" />
+		</p>
 	    <div class="form-actions">
 		    <button type="submit" class="btn btn-primary btn-large">Registrar</button>
 		    <button type="reset" class="btn">Cancelar</button>
 	    </div>
     </form>
 {% endblock contenido %}
-
