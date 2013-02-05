@@ -7,7 +7,7 @@ from django.template import RequestContext
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
-from principal.forms import PerfilForm, EditarUserForm, EditarPerfilForm
+from principal.forms import PerfilForm, EditarUserFormAdm, EditarUserFormUser,EditarPerfilForm
 
 def lista_usuarios(request):
 	usuarios = User.objects.all()
@@ -29,13 +29,13 @@ def registrar_usuario(request):
 def editar_usuario(request, id_usuario):
 	usuario = User.objects.get(pk = id_usuario)
 	if request.method=='POST':
-		formulario = EditarUserForm(request.POST, instance=usuario)
+		formulario = EditarUserFormAdm(request.POST, instance=usuario)
 		if formulario.is_valid():
 			formulario.save()
 			return HttpResponseRedirect('/usuarios')
 	else:
-		formulario = EditarUserForm(instance = usuario)
-	return render_to_response('editarusuario.html', {'formulario':formulario, 'usuario':usuario}, context_instance=RequestContext(request))
+		formulario = EditarUserFormAdm(instance = usuario)
+	return render_to_response('editar_adm.html', {'formulario':formulario, 'usuario':usuario}, context_instance=RequestContext(request))
 
 def editar_perfil(request, id_perfil):
 	perfil = PerfilUsuario.objects.get(id = id_perfil)
