@@ -6,20 +6,44 @@
 
 {% block contenido %}
 <div class="row">
-	<div class="span7">
-		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-		proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </p>
+	<div class="span8">
+		<div id="myCarousel" class="carousel slide">
+            <div class="carousel-inner">
+              <div class="item">
+                <img src="http://twitter.github.com/bootstrap/assets/img/bootstrap-mdo-sfmoma-01.jpg" alt="">
+                <div class="carousel-caption">
+                  <h4>First Thumbnail label</h4>
+                  <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                </div>
+              </div>
+              <div class="item active">
+                <img src="http://twitter.github.com/bootstrap/assets/img/bootstrap-mdo-sfmoma-02.jpg" alt="">
+                <div class="carousel-caption">
+                  <h4>Second Thumbnail label</h4>
+                  <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                </div>
+              </div>
+              <div class="item">
+                <img src="http://twitter.github.com/bootstrap/assets/img/bootstrap-mdo-sfmoma-03.jpg" alt="">
+                <div class="carousel-caption">
+                  <h4>Third Thumbnail label</h4>
+                  <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                </div>
+              </div>
+            </div>
+            <a class="left carousel-control" href="#myCarousel" data-slide="prev">‹</a>
+            <a class="right carousel-control" href="#myCarousel" data-slide="next">›</a>
+          </div>
 	</div>
-	<div class="span5">
+	
+	<div class="span4">
+		{% if user.is_authenticated %}
+		{% else %}
 		<section id="ingresar">  
 			<form action="" id="formulario" class="form-horizontal" method="POST">
 				{% csrf_token %}
 				
-					<legend><b><p class="tit1">Ingresar</p></b></legend>
+					<legend><p class="tit1">Ingresar</p></legend>
 				<!--{{formulario}} -->
 					<div class="control-group">
 			             <div class="input-prepend">
@@ -41,7 +65,8 @@
 				    </div>
 					<!--<input type="submit" class="btn btn-primary btn-medium" value="Ingresar">-->
 			</form>
-		</section>  
+		</section>
+		{% endif %}
 	</div>
 </div>
 {% endblock contenido %}
