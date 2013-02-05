@@ -11,8 +11,6 @@ from principal.forms import PerfilForm, EditarUserForm, EditarPerfilForm
 import json
 from principal.forms import PerfilForm, EditarUserForm, EditarPerfilForm, EditarEstado
 
-def home(request):
-	return render_to_response('home.html', context_instance=RequestContext(request))
 
 def lista_usuarios(request):
 	usuarios = User.objects.all()
@@ -72,9 +70,9 @@ def nuevo_perfil(request, id_usuario):
 	return render_to_response('nuevoperfil.html',{'formulario':formulario, 'dato':dato}, context_instance=RequestContext(request))
 
 # login:
-def ingresar(request):	
-	if not request.user.is_anonymous():
-		return HttpResponseRedirect('/privado')
+def home(request):	
+	#if not request.user.is_anonymous():
+	#	return HttpResponseRedirect('/usuarios/')
 	if request.method == 'POST':
 		formulario = AuthenticationForm(request.POST)
 		if formulario.is_valid:
@@ -84,14 +82,14 @@ def ingresar(request):
 			if acceso is not None:
 				if acceso.is_active:
 					login(request, acceso)
-					return HttpResponseRedirect('/privado')
+					return HttpResponseRedirect('/')
 				else:
 					return render_to_response('noactivo.html', context_instance=RequestContext(request))
 			else:
 				return render_to_response('nousuario.html', context_instance=RequestContext(request))
 	else:
 		formulario = AuthenticationForm()
-	return render_to_response('ingresar.html',{'formulario':formulario}, context_instance=RequestContext(request))
+	return render_to_response('home.html',{'formulario':formulario}, context_instance=RequestContext(request))
 
 @login_required(login_url='/ingresar')
 def privado(request):
@@ -133,5 +131,3 @@ def edit_estado(request):
 	
 def probandoajax(request):
 	return render_to_response("probando_Ajax.html",context_instance=RequestContext(request))
-
-
