@@ -39,13 +39,14 @@ Usuarios
                <!--<a class="btn btn-sucess" href="/ver_usuario/{{usuario.id}}"-->
               <i class="icon-zoom-in icon-white"></i>
             </a>
-            <a data-toggle="modal" class="btn btn-info" href="/editar-usuario/{{usuario.id}}" data-target="#myModal2">
+            <a class="btn btn-info" href="/usuarios/editar-usuario/{{usuario.id}}">
 
               <i class="icon-edit icon-white"></i>
             </a>
             <a class="btn btn-danger" href="/usuarios/{{usuario.id}}/perfiles">
               <i class="icon-user icon-white"></i>
             </a>
+            <a class="btn btn-warning"><i class="icon-white icon-refresh"></i></a>
           </td> 
         </tr>
         {% endfor %}
@@ -66,20 +67,4 @@ Usuarios
 </div>
 
 
-<div id="myModal2" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-
-    <div class="modal-header">      
-      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-      <h3 id="myModalLabel">Datos de Usuario</h3>
-    </div>
-    <div class="modal-body">  
-
-    </div>    
-    <div class="modal-footer">
-      <button class="btn" data-dismiss="modal" aria-hidden="true">Salir</button>
-    </div>
-</div>
-    </div>
-    
-</div>
 {% endblock contenido %}

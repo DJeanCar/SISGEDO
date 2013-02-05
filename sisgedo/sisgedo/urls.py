@@ -7,10 +7,11 @@ urlpatterns = patterns('',
     url(r'^$', 'principal.views.home'),
     url(r'^usuarios/$', 'principal.views.lista_usuarios'),
 	url(r'^usuarios/registrar/$', 'principal.views.registrar_usuario'),
-    url(r'^usuarios/editar/(?P<id_usuario>\d+)$', 'principal.views.editar_usuario'),
+    url(r'^usuarios/editar-usuario/(?P<id_usuario>\d+)$', 'principal.views.editar_usuario'),
     url(r'^usuarios/(?P<id_usuario>\d+)/perfiles$','principal.views.ver_perfiles'),
 
-    url(r'^editar-usuario/(?P<id_usuario>\d+)$', 'principal.views.editar_usuario'),
+    #Solo se esta usando el de arriba usuarios/editar/ ..... 
+    #url(r'^editar-usuario/(?P<id_usuario>\d+)$', 'principal.views.editar_usuario'),
     url(r'^ver_usuario/(?P<id_usuario>\d+)$','principal.views.ver_usuario'),
     url(r'^ver_perfiles/(?P<id_usuario>\d+)$','principal.views.ver_perfiles'),
     url(r'^nuevo_perfil/(?P<id_usuario>\d+)$','principal.views.nuevo_perfil'),

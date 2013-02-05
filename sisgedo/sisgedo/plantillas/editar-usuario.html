@@ -1,11 +1,23 @@
-<form action="/usuarios/editar/{{usuario.id}}" id="formulario23" class="form-horizontal" method="POST">
+{% extends "base.html" %}
+{% block titulo %}
+Usuarios
+{% endblock titulo %}
+{% block contenido %}
+
+<ul class="breadcrumb">
+  <li><a href="#">Sisgedo</a> <span class="divider">/</span></li>
+  <li><a href="/usuarios">Usuarios</a> <span class="divider">/</span></li>
+  <li class="active">Editar Usuario</li>
+</ul>
+
+<form action="/usuarios/editar-usuario/{{usuario.id}}" id="formulario23" class="form-horizontal" method="POST">
 	{% csrf_token %}
-	{{formulario.as_p}}
+	<table>
+    {{formulario.as_p}}
+  </table>
 	<input type="hidden" value="{{usuario.username}}" id="username-validar">
-    <div class="form-actions">
-	    <button type="submit" class="btn btn-primary btn-large">Registrar</button>
-	    <button type="reset" class="btn">Cancelar</button>
-    </div>
+    
+	    <button type="submit" class="btn btn-primary">Guardar cambios</button>
 </form>
 <script src="http://code.jquery.com/jquery-1.9.0.min.js"></script>
         <script type="text/javascript">
@@ -41,3 +53,4 @@
               });
           }
         </script>
+{% endblock contenido %}
