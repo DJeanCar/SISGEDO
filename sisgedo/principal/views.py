@@ -68,10 +68,7 @@ def nuevo_perfil(request, id_usuario):
 		formulario=PerfilForm()
 	return render_to_response('nuevoperfil.html',{'formulario':formulario, 'dato':dato}, context_instance=RequestContext(request))
 
-# login:
 def home(request):	
-	#if not request.user.is_anonymous():
-	#	return HttpResponseRedirect('/usuarios/')
 	if request.method == 'POST':
 		formulario = AuthenticationForm(request.POST)
 		if formulario.is_valid:
@@ -107,15 +104,6 @@ def ajax_username(request):
 	data = json.dumps(results)
 	mimetype = 'application/json'
 	return HttpResponse(data, mimetype)
-#def ajax(request):
-#	clave=request.GET["id_buscar"]
-#	usuario=User.objects.get(pk=clave)
-#	return HttpResponse(usuario.username)
-
-def ajax(request):
-	clave=request.GET["id_buscar"]
-	usuario=User.objects.get(pk=clave)
-	return HttpResponse(usuario.username)
 
 def edit_estado(request):
 	clave=request.POST["id_perfil_edit"]
@@ -127,6 +115,3 @@ def edit_estado(request):
 	perfil.save()
 	estado = perfil.estado
 	return HttpResponse(estado)
-	
-def probandoajax(request):
-	return render_to_response("probando_Ajax.html",context_instance=RequestContext(request))

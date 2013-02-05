@@ -6,7 +6,16 @@
 
 {% block contenido %}
 
-    <form action="" id="formulario" class="form-horizontal" method="POST">
+<div class="row">
+	<ul class="breadcrumb">
+	  <li><a href="#">Sisgedo</a> <span class="divider">/</span></li>
+	  <li><a href="#">Usuarios</a> <span class="divider">/</span></li>
+	  <li class="active">Registrar nuevo usuario</li>
+	</ul>
+	
+<div class="span7">
+	<h3>Registrar nuevo usuario</h3>
+	<form action="" id="formulario" class="form-horizontal" method="POST">
     	{% csrf_token %}
 	    <div class="control-group">
 		    <label class="control-label" for="id_username">Username</label>
@@ -68,4 +77,12 @@
 		    <button type="reset" class="btn btn-primary btn-medium">Cancelar</button>
 	    </div>
     </form>
+</div>
+<div class="span5">
+	<h3>Informacion</h3>
+	<p>
+		En este apartado puedes registrar un nuevo usuario.
+	</p>
+</div>
+</div>
 {% endblock contenido %}

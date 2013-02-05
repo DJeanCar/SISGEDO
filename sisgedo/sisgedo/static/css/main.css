@@ -80,9 +80,6 @@ table .headerSortUp:after{border-bottom:none;border-left:4px solid transparent;b
 /* Validacion de formulario registrar */
 
 label.valid {
-    width: 24px;
-    height: 24px;
-    background: url(assets/img/valid.png) center center no-repeat;
     display: inline-block;
     text-indent: -9999px;
 }

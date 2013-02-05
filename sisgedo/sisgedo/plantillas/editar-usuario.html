@@ -10,7 +10,7 @@ Usuarios
   <li class="active">Editar Usuario</li>
 </ul>
 
-<form action="/usuarios/editar-usuario/{{usuario.id}}" id="formulario23" class="form-horizontal" method="POST">
+<form action="/usuarios/editar/{{usuario.id}}" id="formulario23" class="form-horizontal" method="POST">
 	{% csrf_token %}
 	<table>
     {{formulario.as_p}}
