@@ -111,6 +111,8 @@ TEMPLATE_DIRS = (
     os.path.join(RUTA_PROYECTO,'plantillas'),
 )
 
+SESSION_COOKIE_AGE = 10
+
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',

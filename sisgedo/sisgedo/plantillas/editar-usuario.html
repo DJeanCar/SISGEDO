@@ -1,0 +1,43 @@
+<form action="/usuarios/editar/{{usuario.id}}" id="formulario23" class="form-horizontal" method="POST">
+	{% csrf_token %}
+	{{formulario.as_p}}
+	<input type="hidden" value="{{usuario.username}}" id="username-validar">
+    <div class="form-actions">
+	    <button type="submit" class="btn btn-primary btn-large">Registrar</button>
+	    <button type="reset" class="btn">Cancelar</button>
+    </div>
+</form>
+<script src="http://code.jquery.com/jquery-1.9.0.min.js"></script>
+        <script type="text/javascript">
+          $(document).on("ready", inicio)
+          var recibir = function(data)
+          {
+            var id = $("#username-validar").val();
+            if (data === id)
+            {
+            }
+            else
+            {
+              $(".helptext").html("El username ya esta utilziado");
+            }
+              
+          }
+          var eror = function(XMLHttpRequest, textStatus, errorThrown)
+          {
+              $(".helptext").html("Correcto");
+          }
+          function inicio()
+          {
+              $("#formulario23 #id_username").on("keyup", evento);
+          }
+          function evento () {
+              var id = $("#formulario23 #id_username").val();
+              $.ajax({
+                  data: { clave : id },
+                  success: recibir,
+                  error: eror,
+                  type: "GET", 
+                  url: "/ajax-username/"
+              });
+          }
+        </script>

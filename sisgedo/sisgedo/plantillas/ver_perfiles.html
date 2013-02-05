@@ -11,20 +11,11 @@
     <h2><i class="icon-user"></i><span class="break"></span>Perfiles de Usuario</h2>
     <div class="box-icon">
       <span class="break"></span>
-      <a data-toggle="modal" href="/nuevo_perfil/{{usuario.id}}" data-target="#myModal"><i class="icon-plus-sign" ></i>
+      <a data-toggle="modal" href="/nuevo_perfil/{{usuario.id}}" data-target="#myModal1"><i class="icon-plus-sign" ></i>
       <span class="break"></span>Nuevo</a>  
  
     </div>
   </div>
-
-<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-header">      
-      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-      <h3 id="myModalLabel">Crear Nuevo Perfil</h3>
-    </div>
-    <div class="modal-body">
-    </div>
-</div>
 
 <div class="box-content">
 
@@ -44,22 +35,37 @@
                   <td>{{dato.tipo}}</td>
                   <td>{{dato.fecha_registro}}</td>
                   <td>{{dato.fecha_vigencia}}</td>
-                  <td> {% if dato.estado == 1 %}
-                      <i class="icon-ok"></i>
-                        {% else %}
-                        <i class="icon-ban-circle icon-28px"></i>
-                        {% endif %}
+                 
+                  <td> 
+                      {% if dato.estado == 1 %}
+                    <input type="checkbox" name="estado-{{dato.id}}" id="id_estado-{{dato.id}}" value="{{dato.id}}" checked="checked"/>
+                    <span class="mensaje">Activo</span>
+                    {% else %}
+                    <input type="checkbox" name="estado-{{dato.id}}" id="id_estado-{{dato.id}}" value="{{dato.id}}">
+                    <span class="mensaje">Inactivo</span>
+                    {% endif %}
                   </td>
                   <td class="center">
                    <a class="btn btn-info" data-toggle="modal" href="/editar_perfil/{{dato.id}}" data-target="#myModal2">
                     <i class="icon-edit icon-white"></i>
                     </a>
-              
                   </td>
                 </tr>
                 {% endfor %}
               </tbody>
-            </table>            
+            </table> 
+                     
+</div>
+
+
+
+<div id="myModal1" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">      
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <h3 id="myModalLabel">Crear Perfil</h3>
+    </div>
+    <div class="modal-body">  
+    </div>    
 </div>
 
 <div id="myModal2" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -71,6 +77,67 @@
     </div>    
 </div>
 
-{% endblock %}
+<script src="http://code.jquery.com/jquery-1.9.0.min.js"></script>
 
+<script>
+
+$(document).on("ready", inicio);
+$(document).on("ready", setup);
+  function setup(){
+    $.ajaxSetup({
+      beforeSend: function(xhr, settings) {
+        function getCookie(name) {
+          var cookieValue = null;
+            if (document.cookie && document.cookie != '') {
+              var cookies = document.cookie.split(';');
+                for (var i = 0; i < cookies.length; i++) {
+                  var cookie = jQuery.trim(cookies[i]);
+                  // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                    }
+                }
+            }
+        return cookieValue;
+        }
+        if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
+      // Only send the token to relative URLs i.e. locally.
+          xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+        }
+      }
+    });
+  }
+
+function inicio()
+{
+  $( "input[type=checkbox]" ).on( "change", evento);
+}
+function evento()
+{
+    var $checkbox1 = $(this);
+    var id_perfil = $(this).val();
+      $.ajax({
+       // data:{id_perfil_edit:id_perfil},
+        type:"post",
+        url:'/edit_estado/',
+        success: function (data)
+        {
+          if (data=="False")
+          {
+            $checkbox1.parent().children('.mensaje').html('Inactivo');
+          }
+          else
+          {
+            $checkbox1.parent().children('.mensaje').html('Activo');
+          }
+        }
+      });
+    console.log(id_perfil);
+}
+
+</script>
+
+{% endblock %}
+ 
 

@@ -1,0 +1,34 @@
+<html lang="es">
+<head>
+
+    <title>Formulario de registro</title>
+	
+	<script src="http://code.jquery.com/jquery-1.9.0.min.js"></script>
+	
+	<script type="text/javascript">
+	$(document).on('ready', inicio);
+	function inicio ()
+	{
+		$("#personalizar").on("click", transicion);
+		
+		function transicion() {
+			$.ajax({
+		        type: "POST",
+		        url: "/check/",
+		        data: { input:  },
+		        success: function(datos){
+		       alert( "Se guardaron los datos: " + datos);
+		      }
+			});
+		}
+	}
+	</script>
+	
+	
+</head>
+
+<body>
+	<input type="text" id="personalizar">
+</body>
+
+</html>
