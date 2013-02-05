@@ -37,20 +37,19 @@
                   <td>{{dato.fecha_vigencia}}</td>
                  
                   <td> 
-                    <form action="">
                       {% if dato.estado == 1 %}
                     <input type="checkbox" name="estado-{{dato.id}}" id="id_estado-{{dato.id}}" value="{{dato.id}}" checked="checked"/>
+                    <span class="mensaje">Activo</span>
                     {% else %}
                     <input type="checkbox" name="estado-{{dato.id}}" id="id_estado-{{dato.id}}" value="{{dato.id}}">
+                    <span class="mensaje">Inactivo</span>
                     {% endif %}
-                    </form>
-
+                    
                   </td>
                   <td class="center">
                    <a class="btn btn-info" data-toggle="modal" href="/editar_perfil/{{dato.id}}" data-target="#myModal2">
                     <i class="icon-edit icon-white"></i>
                     </a>
-                    <input type="text" value="{{dato.id}}" id="idPerfil-{{dato.id}}">
                   </td>
                 </tr>
                 {% endfor %}
@@ -60,6 +59,15 @@
 </div>
 
 <div id="log"></div>
+
+<div id="myModal1" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">      
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <h3 id="myModalLabel">Crear Perfil</h3>
+    </div>
+    <div class="modal-body">  
+    </div>    
+</div>
 
 <div id="myModal2" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-header">      
@@ -107,11 +115,23 @@ function inicio()
 }
 function evento()
 {
-    var id_perfil = $( this ).on( "click").val();
+    var $checkbox1 = $(this);
+    var id_perfil = $(this).val();
       $.ajax({
         data:{"id_perfil_edit":id_perfil},
         type:"post",
         url:'/edit_estado/',
+        success: function (data)
+        {
+          if (data=="False")
+          {
+            $checkbox1.parent().children('.mensaje').html('Inactivo');
+          }
+          else
+          {
+            $checkbox1.parent().children('.mensaje').html('Activo');
+          }
+        }
       });
     console.log(id_perfil);
 }

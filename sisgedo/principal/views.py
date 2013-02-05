@@ -101,7 +101,7 @@ def privado(request):
 @login_required(login_url='/ingresar')
 def cerrar(request):
 	logout(request)
-	return HttpResponseRedirect('/cerrar')
+	return HttpResponseRedirect('/')
 
 def ajax_username(request):
 	ids = request.GET['clave']
@@ -128,6 +128,7 @@ def edit_estado(request):
 	else:
 		perfil.estado = True
 	perfil.save()
+	estado = perfil.estado
 	return HttpResponse(estado)
 	#if request.method=='POST':
 	#	formulario = EditarEstado(request.POST, instance=perfil)
