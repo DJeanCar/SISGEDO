@@ -44,7 +44,6 @@
                     <input type="checkbox" name="estado-{{dato.id}}" id="id_estado-{{dato.id}}" value="{{dato.id}}">
                     <span class="mensaje">Inactivo</span>
                     {% endif %}
-                    
                   </td>
                   <td class="center">
                    <a class="btn btn-info" data-toggle="modal" href="/editar_perfil/{{dato.id}}" data-target="#myModal2">
@@ -58,7 +57,7 @@
                      
 </div>
 
-<div id="log"></div>
+
 
 <div id="myModal1" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-header">      
@@ -81,6 +80,7 @@
 <script src="http://code.jquery.com/jquery-1.9.0.min.js"></script>
 
 <script>
+
 $(document).on("ready", inicio);
 $(document).on("ready", setup);
   function setup(){
@@ -118,7 +118,7 @@ function evento()
     var $checkbox1 = $(this);
     var id_perfil = $(this).val();
       $.ajax({
-        data:{"id_perfil_edit":id_perfil},
+       // data:{id_perfil_edit:id_perfil},
         type:"post",
         url:'/edit_estado/',
         success: function (data)
