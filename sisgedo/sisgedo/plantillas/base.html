@@ -36,6 +36,7 @@
                     <div class="nav-collapse collapse">
                         <ul class="nav">
                             <li class="active"><a href="/">Inicio</a></li>
+                            <li><a href="/usuarios/">Usuarios</a></li>
                         </ul>
                         {% if user.is_authenticated %}
                         <ul class="nav pull-right">
@@ -59,13 +60,14 @@
                 <p>&copy; Company 2012</p>
             </footer>
 
-        </div> <!-- /container -->
+        </div>
         <script src="http://code.jquery.com/jquery-1.9.0.min.js"></script>
         <script src="{{STATIC_URL}}js/bootstrap.min.js"></script>
         <script src='{{STATIC_URL}}js/jquery.dataTables.min.js'></script>
         <script src="{{STATIC_URL}}js/bootstrap-datepicker.js"></script>
         <script src='{{STATIC_URL}}js/validateform.js'></script>
         <script src='{{STATIC_URL}}js/main.js'></script>
+        {% block script %}{% endblock %}
         <script>
             var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
             (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
