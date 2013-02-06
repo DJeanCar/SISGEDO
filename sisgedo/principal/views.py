@@ -1,5 +1,4 @@
 from principal.models import *
-from principal.forms import RegisterUserCreateForm
 from django.contrib.auth.models import User
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response, get_object_or_404
@@ -7,24 +6,25 @@ from django.template import RequestContext
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
-from principal.forms import PerfilForm, EditarUserFormAdm, EditarUserFormUser,EditarPerfilForm, EditarEstado
+from principal.forms import RegistrarUsuarioForm, PerfilForm, EditarUserFormAdm, EditarUserFormUser,EditarPerfilForm
 import json
+from django.http import Http404
 
 
-def lista_usuarios(request):
+def usuarios(request):
 	usuarios = User.objects.all()
 	return render_to_response('usuarios.html', {'usuarios':usuarios}, context_instance=RequestContext(request))
 
 def registrar_usuario(request):
 	if request.method=='POST':
-		formulario = RegisterUserCreateForm(request.POST)
+		formulario = RegistrarUsuarioForm(request.POST)
 		#Hay diferencia entre is_valid() y is_valid, mientras que el primero valida mostrando los errores el ultimo no muestra los errores.
 		if formulario.is_valid():
 			formulario.save()
-			return HttpResponseRedirect('/usuarios')
+			return HttpResponseRedirect('/usuarios/')
 	else:
-		formulario = RegisterUserCreateForm()
-	return render_to_response('nuevousuario.html', {'formulario':formulario}, context_instance=RequestContext(request))
+		formulario = RegistrarUsuarioForm()
+	return render_to_response('nuevo-usuario.html', {'formulario':formulario}, context_instance=RequestContext(request))
 
 def editar_usuario(request, id_usuario):
 	usuario = User.objects.get(pk = id_usuario)
@@ -98,12 +98,16 @@ def cerrar(request):
 	return HttpResponseRedirect('/')
 
 def ajax_username(request):
-	ids = request.GET['clave']
-	usuario = User.objects.get(username = ids)
-	results = usuario.username
-	data = json.dumps(results)
-	mimetype = 'application/json'
-	return HttpResponse(data, mimetype)
+	if request.is_ajax():
+		username = request.GET['username']
+		try:
+			usuario = User.objects.get(username = username)
+			data = usuario.username
+		except:
+			data = False
+		return HttpResponse(data)
+	else:
+		raise Http404
 
 def edit_estado(request):
 	clave=request.POST["id_perfil_edit"]

@@ -117,7 +117,7 @@ $(document).ready(function() {
     } );
 } );
 
-$(document).ready(function(){
+/*$(document).ready(function(){
  
     $('#formulario').validate({
         rules: {
@@ -144,4 +144,4 @@ $(document).ready(function(){
             .closest('.control-group').addClass('success');
         }
     });
-}); // end document.ready
+}); // end document.ready*/

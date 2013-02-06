@@ -1,0 +1,145 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+	Registrar Usuario
+{% endblock titulo %}
+
+{% block contenido %}
+
+<div class="row">
+	<ul class="breadcrumb">
+	  <li><a href="#">Sisgedo</a> <span class="divider">/</span></li>
+	  <li><a href="#">Usuarios</a> <span class="divider">/</span></li>
+	  <li class="active">Registrar nuevo usuario</li>
+	</ul>
+	
+<div class="span7">
+	<legend class="header">Registrar nuevo usuario</legend>
+	<form action="" id="formulario" class="form-horizontal" method="POST">
+    	{% csrf_token %}
+	    <div class="control-group">
+		    <label class="control-label" for="id_username">Username</label>
+		    <div class="controls">
+			    <input id="id_username" type="text" name="username" maxlength="30" class="input-xlarge" placeholder="Nombre de usuario" title="El nombre de usuario es necesario" required>
+			    <p class="help-block"></p>
+		    </div>
+	    </div>
+	    <div class="control-group">
+		    <label class="control-label" for="id_first_name">Nombres</label>
+		    <div class="controls">
+			    <input id="id_first_name" type="text" name="first_name" maxlength="200" class="input-xlarge" placeholder="Nombres" title="Se necesita los nombres" required>
+		    </div>
+	    </div>
+	    <div class="control-group">
+		    <label class="control-label" for="id_last_name">Apellidos</label>
+		    <div class="controls">
+			    <input id="id_last_name" type="text" name="last_name" maxlength="200" class="input-xlarge" placeholder="Apellidos" title="Se necesita los apellidos" required>
+		    </div>
+	    </div>
+	    <div class="control-group">
+		    <label class="control-label" for="id_email">Email</label>
+		    <div class="controls">
+			    <input type="email" class="input-xlarge" name="email" id="id_email" placeholder="Email" title="Se necesita el email" required>
+		    </div>
+	    </div>
+	    <div class="control-group">
+		    <label class="control-label" for="id_is_active">Activo</label>
+		    <div class="controls">
+		    	<input checked="checked" type="checkbox" name="is_active" id="id_is_active" class="input-xlarge"/>
+		    </div>
+	    </div>
+	    <div class="control-group">
+		    <label class="control-label" for="id_direccion">Direccion</label>
+		    <div class="controls">
+		    	<input id="id_direccion" type="text" name="direccion" maxlength="500" class="input-xlarge" title="Se necesita la direccion" required/>
+		    </div>
+	    </div>
+	    <div class="control-group">
+		    <label class="control-label" for="id_telefono">Telefono</label>
+		    <div class="controls">
+		    	<input type="number" name="telefono" id="id_telefono" maxlength="500" class="input-xlarge" title="Numero necesario" required/>
+		    </div>
+	    </div>
+	    <div class="control-group">
+		    <label class="control-label" for="id_password1">Contraseña</label>
+		    <div class="controls">
+		    	<input type="password" name="password1" id="id_password1" class="input-xlarge" title="Se necesita la contraseña" required/>
+		    </div>
+	    </div>
+	    <div class="control-group">
+		    <label class="control-label" for="id_password2">Confirma tu contraseña</label>
+		    <div class="controls">
+		    	<input type="password" name="password2" id="id_password2" class="input-xlarge" title="Se necesita la confirmacion de la contraseña" required/>
+		    	<p class="help-block username"></p>
+		    </div>
+	    </div>
+	    <div class="form-actions">
+		    <button type="submit" class="btn btn-primary btn-medium" id="boton-registrar">Registrar</button>
+		    <button type="reset" class="btn btn-primary btn-medium">Cancelar</button>
+	    </div>
+    </form>
+</div>
+<div class="span5">
+	<h3>Informacion</h3>
+	<p>
+		En este apartado puedes registrar un nuevo usuario.
+	</p>
+</div>
+</div>
+<script src="http://code.jquery.com/jquery-1.9.0.min.js"></script>
+<script type="text/javascript">
+	$(document).on("ready", inicio);
+	var recibir = function(data)
+	{
+		if (data === 'False')
+		{
+			if ($("#id_username").val())
+			{
+				$("#id_username ~ .help-block").html("Correcto");
+			}
+			else
+			{
+				$("#id_username ~ .help-block").html("");
+			}
+		}
+		else
+		{
+			$("#id_username ~ .help-block").html("El nombre de usuario ya esta utiliziado");
+		}
+	}
+	var eror = function(data, XMLHttpRequest, textStatus, errorThrown)
+	{
+		$("#id_username ~ .help-block").html("Errorrrrrrrr");
+	}
+	function inicio()
+	{
+		$("#id_username").on("keyup", evento);
+		$("#id_password2").on("keyup", validar);
+	}
+	function evento ()
+	{
+		var username = $("#id_username").val();
+		$.ajax({
+			url: "/ajax-username/",
+			data: { username : username },
+			type: "GET",
+			success: recibir,
+			error: eror
+		});
+	}
+	function validar()
+	{
+		var password1 = $("#id_password1").val();
+		var password2 = $("#id_password2").val();
+
+		if (password1 === password2)
+		{
+			$("#id_password2 ~ .help-block").html("");
+		}
+		else
+		{
+			$("#id_password2 ~ .help-block").html("Las contraseñas no coinciden.");
+		}
+	}
+</script>
+{% endblock contenido %}

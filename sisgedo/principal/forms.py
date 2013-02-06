@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from principal.models import PerfilUsuario
 
-class RegisterUserCreateForm(UserCreationForm):
+class RegistrarUsuarioForm(UserCreationForm):
     first_name = forms.CharField(label='Nombres')
     class Meta:
         model = User
@@ -38,15 +38,3 @@ class EditarPerfilForm(ModelForm):
     class Meta:
         model = PerfilUsuario
         exclude=("usuario_id")
-
-class EditarEstado(ModelForm):
-    class Meta:
-        model = PerfilUsuario
-        exclude=("usuario_id","tipo","fecha_vigencia","fecha_registro")
-
-
-
-
-        
-
-

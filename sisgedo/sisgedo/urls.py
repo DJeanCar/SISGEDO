@@ -5,7 +5,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     url(r'^$', 'principal.views.home'),
-    url(r'^usuarios/$', 'principal.views.lista_usuarios'),
+    url(r'^usuarios/$', 'principal.views.usuarios'),
 	url(r'^usuarios/registrar/$', 'principal.views.registrar_usuario'),
     url(r'^usuarios/editar/(?P<id_usuario>\d+)$', 'principal.views.editar_usuario'),
     url(r'^usuarios/(?P<id_usuario>\d+)/perfiles$','principal.views.ver_perfiles'),
@@ -21,5 +21,5 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
 
     url(r'^ajax-username/$', 'principal.views.ajax_username'),
-    rl(r'^edit_estado/$', 'principal.views.edit_estado'),
+    url(r'^edit_estado/$', 'principal.views.edit_estado'),
 )

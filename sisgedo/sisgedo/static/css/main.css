@@ -79,7 +79,7 @@ table .headerSortUp:after{border-bottom:none;border-left:4px solid transparent;b
 
 /* Validacion de formulario registrar */
 
-label.valid {
+/*label.valid {
     display: inline-block;
     text-indent: -9999px;
 }
@@ -88,7 +88,7 @@ label.error {
     color: red;
     padding: 2px 8px;
     margin-top: 2px;
-}
+}*/
 
 #ingresar
 {
