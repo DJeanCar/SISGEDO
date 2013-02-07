@@ -19,7 +19,6 @@
         <style>
             body {
                 padding-top: 60px;
-                padding-bottom: 40px;
             }
         </style>
     </head>
@@ -54,13 +53,29 @@
         <div class="container">
             {% block contenido %}                
             {% endblock contenido %}
-            <hr>
-
-            <footer>
-                <p>&copy; Company 2012</p>
-            </footer>
-
         </div>
+        <footer class="footer">
+            <div class="container">
+                <p>Diseñado y construido con mucho amor para el mundo por <a href="http://twitter.com/qaysen" target="_blank">@Qaysen</a></p>
+                <p>Codigo bajo licencia <a href="http://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License v2.0</a>, documentacion bajo <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.</p>
+                <ul class="footer-links">
+                  <li><a href="http://blog.getbootstrap.com">Elicia</a></li>
+                  <li class="muted">·</li>
+                  <li><a href="https://github.com/twitter/bootstrap/issues?state=open">Fiorella</a></li>
+                  <li class="muted">·</li>
+                  <li><a href="https://github.com/twitter/bootstrap/wiki">Michael</a></li>
+                  <li class="muted">·</li>
+                  <li><a href="https://github.com/twitter/bootstrap/wiki">Oscar</a></li>
+                  <li class="muted">·</li>
+                  <li><a href="https://github.com/twitter/bootstrap/wiki">Orlando</a></li>
+                  <li class="muted">·</li>
+                  <li><a href="https://github.com/twitter/bootstrap/wiki">Jhonatan</a></li>
+                  <li class="muted">·</li>
+                  <li><a href="https://github.com/twitter/bootstrap/wiki">Edwin</a></li>
+                </ul>
+              </div>
+            <p>&copy; <a href="http://www.qaysen.com">Qaysen</a> 2013</p>
+        </footer>
         <script src="http://code.jquery.com/jquery-1.9.0.min.js"></script>
         <script src="{{STATIC_URL}}js/bootstrap.min.js"></script>
         <script src='{{STATIC_URL}}js/jquery.dataTables.min.js'></script>

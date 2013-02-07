@@ -5,7 +5,7 @@ Usuarios
 {% block contenido %}
 
 <ul class="breadcrumb">
-  <li><a href="#">Sisgedo</a> <span class="divider">/</span></li>
+  <li><a href="/">Sisgedo</a> <span class="divider">/</span></li>
   <li class="active">Usuarios</li>
 </ul>
 
@@ -23,7 +23,7 @@ Usuarios
           <th>Nombres</th>
           <th>Apellidos</th>
           <th>Usuario</th>
-          <th>DNI</th>
+          <th>Email</th>
           <th>Acciones</th>
         </tr>
       </thead>   
@@ -33,8 +33,8 @@ Usuarios
           <td>{{usuario.first_name}}</td>
           <td>{{usuario.last_name}}</td>
           <td>{{usuario.username}}</td>
-          <td>{{usuario.dni}}</td>
-          <td class="center">
+          <td>{{usuario.email}}</td>
+          <td class="center" style="width:130px; text-align:center;">
             <a data-toggle="modal" class="btn btn-success" href="/ver_usuario/{{usuario.id}}" data-target="#myModal">
                <!--<a class="btn btn-sucess" href="/ver_usuario/{{usuario.id}}"-->
               <i class="icon-zoom-in icon-white"></i>
@@ -46,7 +46,7 @@ Usuarios
             <a class="btn btn-danger" href="/usuarios/{{usuario.id}}/perfiles">
               <i class="icon-user icon-white"></i>
             </a>
-            <a class="btn btn-warning"><i class="icon-white icon-refresh"></i></a>
+            <!--<a class="btn btn-warning"><i class="icon-white icon-refresh"></i></a>-->
           </td> 
         </tr>
         {% endfor %}

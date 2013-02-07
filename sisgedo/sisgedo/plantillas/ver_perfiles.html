@@ -7,6 +7,12 @@
 
 {% block contenido %}
 
+<ul class="breadcrumb">
+  <li><a href="/">Sisgedo</a> <span class="divider">/</span></li>
+  <li><a href="/usuarios/">Usuarios</a> <span class="divider">/</span></li>
+  <li class="active">Perfiles de {{usuario.username|capfirst}}</li>
+</ul>
+
   <div class="box-header" data-original-title>
     <h2><i class="icon-user"></i><span class="break"></span>Perfiles de Usuario</h2>
     <div class="box-icon">
@@ -118,7 +124,7 @@ function evento()
     var $checkbox1 = $(this);
     var id_perfil = $(this).val();
       $.ajax({
-       // data:{id_perfil_edit:id_perfil},
+        data:{id_perfil_edit:id_perfil},
         type:"post",
         url:'/edit_estado/',
         success: function (data)
