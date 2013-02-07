@@ -35,10 +35,10 @@ Usuarios
           <td>{{usuario.username}}</td>
           <td>{{usuario.email}}</td>
           <td class="center" style="width:130px; text-align:center;">
-            <a data-toggle="modal" class="btn btn-success" href="/ver_usuario/{{usuario.id}}" data-target="#myModal">
-               <!--<a class="btn btn-sucess" href="/ver_usuario/{{usuario.id}}"-->
-              <i class="icon-zoom-in icon-white"></i>
-            </a>
+            <button class="btn btn-success" value="{{usuario.id}}" >
+            
+            <i class="icon-zoom-in icon-white"></i>
+            </button>
             <a class="btn btn-info" href="/usuarios/editar/{{usuario.id}}">
 
               <i class="icon-edit icon-white"></i>
@@ -56,15 +56,51 @@ Usuarios
 
 <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-header">      
-      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      
       <h3 id="myModalLabel">Datos de Usuario</h3>
     </div>
     <div class="modal-body">  
     </div>    
     <div class="modal-footer">
-      <button class="btn" data-dismiss="modal" aria-hidden="true">Salir</button>
+      
     </div>
 </div>
 
 
 {% endblock contenido %}
+
+{% block script %}
+  <script >
+$(document).on("ready",verusuario);
+
+function verusuario()
+{
+  $("button").on("click",evento);
+}
+    
+function evento()
+{
+  var id=$(this).val(); 
+
+
+  $("#myModal").load('/ver_usuario/{{id}}', function() { // load the url into the modal
+      $(this).modal('show'); // display the modal on url load
+  });
+
+  $.ajax({
+    data:{'id_usuario':id},
+    type:"get",
+    url:'/ver_usuario/',
+    
+    success:function(data)
+    {  
+
+    $(".modal-body").html('<div>Usuario:   '+data.user+'</div><div>Nombre:   '+data.nombre+'</div><div>Apellido:   '+data.apellido+'</div><div>Email:   '+data.email+'</div><div>Direccion:   '+data.direccion+'</div><div>Telefono:   '+data.telefono+'</div>');
+   
+    }
+  }); 
+
+}
+
+</script>
+{% endblock script %}

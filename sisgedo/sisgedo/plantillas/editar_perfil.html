@@ -1,25 +1,33 @@
 <form action="/editar_perfil/{{perfil.id}}" id="formulario" method="post">
 	{% csrf_token %}
-	<label for="id_tipo">Tipo:</label>
-		<select name="tipo" id="id_tipo" >
-		<option value="">---------</option>
-		<option value="operario">operario</option>
-		<option value="supervisor">supervisor</option>
-		<option value="administrador">administrador</option>
-		</select>
+	<div class="control-group">
+        <label class="control-label" for="id_tipo">Tipo</label>
+        <div class="controls">
+          {{formulario.tipo}}
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="id_fecha_registro">Fecha registro:</label>
+        <div class="controls">
+          <input class="span3 dp2 valida" data-date-format="dd/mm/yy" name="fecha_registro" id="id_fecha_registro" placeholder="Fecha de registro" value="{{perfil.fecha_registro|date:"d/n/y"}}">	
+        </div>
+    </div>
 
-	<label for="id_fecha_registro">Fecha registro:</label>
-	<input class="span3 dp2 valida" data-date-format="dd/mm/yy" name="fecha_registro" id="id_fecha_registro" placeholder="Fecha de registro" >	
+    <div class="control-group">
+        <label class="control-label" for="id_fecha_vigencia">Fecha vigencia:</label>
+        <div class="controls">
+          <input class="span3 dp2 valida" data-date-format="dd/mm/yy" name="fecha_vigencia" id="id_fecha_vigencia" placeholder="Fecha de vigencia" value="{{perfil.fecha_vigencia|date:"d/n/y"}}">
+        </div>
+    </div>
 
-	<label for="id_fecha_vigencia">Fecha vigencia:</label>
-	<input class="span3 dp2 valida" data-date-format="dd/mm/yy" name="fecha_vigencia" id="id_fecha_vigencia" placeholder="Fecha de vigencia" >	
-	<label for="id_estado">Estado:</label>
-	{% if perfil.estado == 1 %}
-        <input type="checkbox" name="estado" id="id_estado" checked="checked"/>
-    {% else %}
-        <input type="checkbox" name="estado" id="id_estado" >
-    {% endif %}
-		<p><input value="Guardar Cambios" type="submit"></p>
+    <div class="control-group">
+        <label class="control-label" for="id_estado">Estado:</label>
+        <div class="controls">
+          {{formulario.estado}}
+        </div>
+    </div>
+
+	<p><input value="Guardar Cambios" type="submit"></p>
 </form>
 
 

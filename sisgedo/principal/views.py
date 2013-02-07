@@ -7,14 +7,16 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from principal.forms import RegistrarUsuarioForm, PerfilForm, EditarUserFormAdm, EditarUserFormUser,EditarPerfilForm
-import json
 from django.http import Http404
+from django.utils import simplejson as json
+from django.core import serializers 
 
-
+@login_required(login_url='/')
 def usuarios(request):
 	usuarios = User.objects.all()
 	return render_to_response('usuarios.html', {'usuarios':usuarios}, context_instance=RequestContext(request))
 
+@login_required(login_url='/')
 def registrar_usuario(request):
 	if request.method=='POST':
 		formulario = RegistrarUsuarioForm(request.POST)
@@ -26,6 +28,7 @@ def registrar_usuario(request):
 		formulario = RegistrarUsuarioForm()
 	return render_to_response('nuevo-usuario.html', {'formulario':formulario}, context_instance=RequestContext(request))
 
+@login_required(login_url='/')
 def editar_usuario(request, id_usuario):
 	usuario = User.objects.get(pk = id_usuario)
 	if request.method=='POST':
@@ -37,6 +40,7 @@ def editar_usuario(request, id_usuario):
 		formulario = EditarUserFormAdm(instance = usuario)
 	return render_to_response('editar-usuario.html', {'formulario':formulario, 'usuario':usuario}, context_instance=RequestContext(request))
 
+@login_required(login_url='/')
 def editar_perfil(request, id_perfil):
 	perfil = PerfilUsuario.objects.get(id = id_perfil)
  	if request.method=='POST':
@@ -48,15 +52,21 @@ def editar_perfil(request, id_perfil):
 		formulario = EditarPerfilForm(instance = perfil)
 	return render_to_response('editar_perfil.html', {'formulario':formulario, 'perfil':perfil}, context_instance=RequestContext(request))
 
-def ver_usuario(request, id_usuario):	
-	dato = User.objects.get(pk=id_usuario)
-	return render_to_response('ver_usuario.html',{'usuario':dato},context_instance = RequestContext(request))
+@login_required(login_url='/')
+def ver_usuario(request):	
+	clave=request.GET['id_usuario']
+	usuario = User.objects.get(pk=clave) 
+	data=json.dumps({'nombre':usuario.first_name,'apellido':usuario.last_name, 'email':usuario.email,'user':usuario.username,'direccion':usuario.direccion,'telefono':usuario.telefono})
+	
+	return HttpResponse(data, mimetype="application/json")
 
+@login_required(login_url='/')
 def ver_perfiles(request, id_usuario):	
 	dato2 = PerfilUsuario.objects.filter(usuario=id_usuario)
 	dato = User.objects.get(pk=id_usuario)
 	return render_to_response('ver_perfiles.html',{'usuario':dato,'verPerfil':dato2},context_instance = RequestContext(request))
 
+@login_required(login_url='/')
 def nuevo_perfil(request, id_usuario):	
 	dato = User.objects.get(pk=id_usuario)
 	if request.method=='POST':
@@ -87,12 +97,12 @@ def home(request):
 		formulario = AuthenticationForm()
 	return render_to_response('home.html',{'formulario':formulario}, context_instance=RequestContext(request))
 
-@login_required(login_url='/ingresar')
+@login_required(login_url='/')
 def privado(request):
 	usuario=request.user
 	return render_to_response('privado.html',{'usuario':usuario},context_instance=RequestContext(request))
 
-@login_required(login_url='/ingresar')
+@login_required(login_url='/')
 def cerrar(request):
 	logout(request)
 	return HttpResponseRedirect('/')
