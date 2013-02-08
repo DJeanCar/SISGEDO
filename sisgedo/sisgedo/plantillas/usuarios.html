@@ -24,6 +24,7 @@ Usuarios
           <th>Apellidos</th>
           <th>Usuario</th>
           <th>Email</th>
+          <th>Estado</th>
           <th>Acciones</th>
         </tr>
       </thead>   
@@ -34,6 +35,16 @@ Usuarios
           <td>{{usuario.last_name}}</td>
           <td>{{usuario.username}}</td>
           <td>{{usuario.email}}</td>
+          <td>
+            {% if usuario.is_active %}
+              Activo
+            {% else %} 
+              Inactivo
+            {% endif %}
+              
+
+          </td>
+
           <td class="center" style="width:180px; text-align:center;">
             <button class="btn btn-success mostrar" value="{{usuario.id}}" >
             
@@ -66,10 +77,6 @@ Usuarios
       
     </div>
 </div>
-
-
-
-
 
 {% endblock contenido %}
 
