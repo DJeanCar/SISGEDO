@@ -32,6 +32,7 @@
                   <th>Fecha registro</th>
                   <th>Fecha de vigencia</th>
                   <th>estado</th>
+                  <th>Online?</th>
                   <th>Acciones</th>
                 </tr>
               </thead>   
@@ -51,6 +52,7 @@
                     <span class="mensaje">Inactivo</span>
                     {% endif %}
                   </td>
+                  <td>{{dato.online}}</td>
                   <td class="center">
                    <a class="btn btn-info" data-toggle="modal" href="/editar_perfil/{{dato.id}}" data-target="#myModal2">
                     <i class="icon-edit icon-white"></i>
