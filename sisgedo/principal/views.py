@@ -129,3 +129,17 @@ def edit_estado(request):
 	perfil.save()
 	estado = perfil.estado
 	return HttpResponse(estado)
+
+def resetear_clave(request):
+	if request.is_ajax():
+		id_usuario = request.POST["id"]
+		try:
+			usuario= User.objects.get(pk=id_usuario)
+			usuario.set_password(usuario.username)
+			usuario.save()
+			dato=usuario.username
+		except:
+			dato=False
+		return HttpResponse(dato)
+	else:
+		raise Http404
