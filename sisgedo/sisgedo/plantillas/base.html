@@ -39,13 +39,12 @@
                         </ul>
                         {% if user.is_authenticated %}
                         <ul class="nav pull-right">
-                            <li id="online"><a href="/"></a></li>
+                            <li id="online"><a href="">{{online}}</a></li>
                             <li><a href="/">{{user.first_name|capfirst}}</a></li>
                             <li><a href="/cerrar/">Cerrar Session</a></li>
                         </ul>
                         {% else %}
                         {% endif %}
-                        
                     </div><!--/.nav-collapse -->
                 </div>
             </div>

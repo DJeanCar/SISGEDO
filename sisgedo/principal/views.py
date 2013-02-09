@@ -10,6 +10,7 @@ from principal.forms import RegistrarUsuarioForm, PerfilForm, EditarUserFormAdm,
 from django.http import Http404
 from django.utils import simplejson as json
 from django.core import serializers 
+from django import template
 
 @login_required(login_url='/')
 def usuarios(request):
@@ -138,8 +139,8 @@ def edit_estado(request):
 def cambiar_online(request):
 	if request.is_ajax():
 		id_perfil = request.POST['id_perfil']
-		perfil_elegido = PerfilUsuario.objects.get(pk = id_perfil)
-		if perfil_elegido:
+		try:
+			perfil_elegido = PerfilUsuario.objects.get(pk = id_perfil)
 			usuario = perfil_elegido.usuario
 			perfiles = PerfilUsuario.objects.filter(usuario = usuario)
 			for perfil in perfiles:
@@ -150,8 +151,23 @@ def cambiar_online(request):
 					perfil.online = False
 					perfil.save()
 			data = perfil_elegido.tipo
-		else:
-			data = "hola"
+		except:
+			data = False
 		return HttpResponse(data)
 	else:
 		raise Http404
+
+def navbar(request):
+	usuario = request.user
+	perfiles = PerfilUsuario.objects.filter(usuario=usuario)
+	for perfil in perfiles:
+		if perfil.online == 1:
+			data = perfil.tipo
+	data = "Edwin"
+	return render_to_response('base.html', {'data': data}, context_instance=RequestContext(request))
+
+def categories(request):
+    all_categories = "edwin"
+    return {
+        'categories': all_categories,
+    }

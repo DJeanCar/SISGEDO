@@ -111,6 +111,18 @@ TEMPLATE_DIRS = (
     os.path.join(RUTA_PROYECTO,'plantillas'),
 )
 
+TEMPLATE_CONTEXT_PROCESSORS = (
+    "django.contrib.auth.context_processors.auth",
+    "django.core.context_processors.debug",
+    "django.core.context_processors.i18n",
+    "django.core.context_processors.media",
+    "django.core.context_processors.static",
+    "django.core.context_processors.tz",
+    "django.contrib.messages.context_processors.messages",
+    "django.contrib.auth.context_processors.auth",
+    'principal.probando.datos_globales',
+)
+
 SESSION_COOKIE_AGE = 1200
 
 INSTALLED_APPS = (
