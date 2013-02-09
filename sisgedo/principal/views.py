@@ -110,6 +110,17 @@ def privado(request):
 
 @login_required(login_url='/')
 def cerrar(request):
+	usuario = request.user
+	try:
+		perfiles = PerfilUsuario.objects.filter(usuario = usuario)
+		if perfiles:
+			for perfil in perfiles:
+				perfil.online = False
+				perfil.save()
+		else:
+			pass
+	except:
+		pass
 	logout(request)
 	return HttpResponseRedirect('/')
 
@@ -157,17 +168,16 @@ def cambiar_online(request):
 	else:
 		raise Http404
 
-def navbar(request):
-	usuario = request.user
-	perfiles = PerfilUsuario.objects.filter(usuario=usuario)
-	for perfil in perfiles:
-		if perfil.online == 1:
-			data = perfil.tipo
-	data = "Edwin"
-	return render_to_response('base.html', {'data': data}, context_instance=RequestContext(request))
-
-def categories(request):
-    all_categories = "edwin"
-    return {
-        'categories': all_categories,
-    }
+def resetear_clave(request):
+	if request.is_ajax():
+		id_usuario = request.POST["id"]
+		try:
+			usuario= User.objects.get(pk=id_usuario)
+			usuario.set_password(usuario.username)
+			usuario.save()
+			dato=usuario.username
+		except:
+			dato=False
+		return HttpResponse(dato)
+	else:
+		raise Http404

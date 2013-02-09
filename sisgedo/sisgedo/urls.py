@@ -22,5 +22,5 @@ urlpatterns = patterns('',
     url(r'^ajax-username/$', 'principal.views.ajax_username'),
     url(r'^edit_estado/$', 'principal.views.edit_estado'),
     url(r'^ajax/cambiar-online/$', 'principal.views.cambiar_online'),
-    url(r'^*$', 'principal.views.navbar'),
+    url(r'^resetear_clave/$', 'principal.views.resetear_clave'),
 )
