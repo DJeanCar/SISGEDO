@@ -111,6 +111,7 @@ TEMPLATE_DIRS = (
     os.path.join(RUTA_PROYECTO,'plantillas'),
 )
 
+#Contexto Procesos sirve para poner variables globales.
 TEMPLATE_CONTEXT_PROCESSORS = (
     "django.contrib.auth.context_processors.auth",
     "django.core.context_processors.debug",
@@ -120,7 +121,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.tz",
     "django.contrib.messages.context_processors.messages",
     "django.contrib.auth.context_processors.auth",
-    'principal.probando.datos_globales',
+    "principal.global.variables_globales",
 )
 
 SESSION_COOKIE_AGE = 1200

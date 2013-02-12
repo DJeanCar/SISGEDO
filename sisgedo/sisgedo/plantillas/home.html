@@ -38,11 +38,12 @@
 
 	<div class="span4">
 		{% if user.is_authenticated %}
+    <legend><p class="tit1">Elige tu perfil :</p></legend>
 			{% for perfil in perfiles %}
 				{% if perfil.estado == 1 %}
 				<div>
 					<button value="{{perfil.id}}" class="btn btn-info">{{perfil.tipo}}</button>
-				</div>
+				</div><br>
 				{% endif %}
 			{% endfor %}
 		{% else %}
