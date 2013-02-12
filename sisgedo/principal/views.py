@@ -181,3 +181,6 @@ def resetear_clave(request):
 		return HttpResponse(dato)
 	else:
 		raise Http404
+
+
+
