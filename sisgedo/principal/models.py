@@ -11,12 +11,12 @@ class PerfilUsuario(models.Model):
 	TIPO=(
 			('operario','operario'),
 			('supervisor','supervisor'),
-			('administrador','administrador'),
 		)
 	tipo = models.CharField(max_length=20,choices=TIPO)
 	fecha_registro = models.DateField() 
 	fecha_vigencia = models.DateField() 
-	estado= models.BooleanField()
+	estado = models.BooleanField()
+	online = models.BooleanField()
 	usuario =models.ForeignKey(User)
 
 	def __unicode__(self):
