@@ -80,7 +80,7 @@ def nuevo_perfil(request, id_usuario):
 		formulario=PerfilForm()
 	return render_to_response('nuevoperfil.html',{'formulario':formulario, 'dato':dato}, context_instance=RequestContext(request))
 
-<<<<<<< HEAD
+
 
 def home(request):
 	if request.method == 'POST':
@@ -108,32 +108,6 @@ def home(request):
 	return render_to_response('home.html',{'formulario':formulario}, context_instance=RequestContext(request))
 					
 
-=======
-def home(request):
-	if request.user.is_authenticated():
-		usuario = request.user
-		perfiles = PerfilUsuario.objects.filter(usuario = usuario)
-		return render_to_response('home.html',{'perfiles':perfiles}, context_instance=RequestContext(request))
-	else:
-		if request.method == 'POST':
-			formulario = AuthenticationForm(request.POST)
-			if formulario.is_valid:
-				usuario = request.POST['username']
-				clave = request.POST['password']
-				acceso = authenticate(username=usuario, password=clave)
-				if acceso is not None:
-					if acceso.is_active:
-						login(request, acceso)
-						return HttpResponseRedirect('/')
-					else:
-						return render_to_response('noactivo.html', context_instance=RequestContext(request))
-				else:
-					return render_to_response('nousuario.html', context_instance=RequestContext(request))
-		else:
-			formulario = AuthenticationForm()
-		return render_to_response('home.html',{'formulario':formulario}, context_instance=RequestContext(request))
->>>>>>> 79cacd992b52a111ca081ef2122f5e91aa741ff2
-
 @login_required(login_url='/')
 def privado(request):
 	usuario=request.user
@@ -141,12 +115,11 @@ def privado(request):
 
 @login_required(login_url='/')
 def cerrar(request):
-<<<<<<< HEAD
+
 	usuario=request.user
 	usuario.estado_login=False
 	usuario.save()
-=======
-	usuario = request.user
+
 	try:
 		perfiles = PerfilUsuario.objects.filter(usuario = usuario)
 		if perfiles:
@@ -157,7 +130,7 @@ def cerrar(request):
 			pass
 	except:
 		pass
->>>>>>> 79cacd992b52a111ca081ef2122f5e91aa741ff2
+
 	logout(request)
 	return HttpResponseRedirect('/')
 
