@@ -83,6 +83,36 @@
         <script src="{{STATIC_URL}}js/bootstrap-datepicker.js"></script>
         <script src='{{STATIC_URL}}js/validateform.js'></script>
         <script src='{{STATIC_URL}}js/main.js'></script>
+        <script src="http://jquery-timer.googlecode.com/svn/trunk/jquery.timer.js"></script>
+    <!-- tiempo de inactividad de un usuario-->
+        {% if user.is_authenticated %}
+        <script type="text/javascript">
+            $(document).on("ready", inicio);
+            function inicio()
+            {
+                var count = 60;
+                var timer = $.timer(principal);
+                function principal() {
+                    $('#counter').html(--count);
+                    if (count == 0)
+                    {
+                        timer.stop();
+                        alert("Ha expirado tu session.");
+                        url = "/cerrar/";  
+                        $(location).attr('href',url); 
+                    }
+                }
+                function reinicio()
+                {
+                    count = 60;
+                }
+                $(document).on("click", reinicio);
+                $(document).on("mousemove", reinicio);
+                $(document).on("keypress", reinicio);
+                timer.set({ time : 1000, autostart : true });
+            }
+        </script>
+        {% endif %}
         {% block script %}{% endblock %}
         <script>
             var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];

@@ -22,4 +22,5 @@ urlpatterns = patterns('',
     url(r'^ajax-username/$', 'principal.views.ajax_username'),
     url(r'^edit_estado/$', 'principal.views.edit_estado'),
     url(r'^resetear_clave/$', 'principal.views.resetear_clave'),
+    
 )

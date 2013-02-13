@@ -11,6 +11,7 @@ from django.http import Http404
 from django.utils import simplejson as json
 from django.core import serializers 
 
+
 @login_required(login_url='/')
 def usuarios(request):
 	usuarios = User.objects.all()
@@ -78,7 +79,8 @@ def nuevo_perfil(request, id_usuario):
 		formulario=PerfilForm()
 	return render_to_response('nuevoperfil.html',{'formulario':formulario, 'dato':dato}, context_instance=RequestContext(request))
 
-def home(request):	
+
+def home(request):
 	if request.method == 'POST':
 		formulario = AuthenticationForm(request.POST)
 		if formulario.is_valid:
@@ -86,8 +88,14 @@ def home(request):
 			clave = request.POST['password']
 			acceso = authenticate(username=usuario, password=clave)
 			if acceso is not None:
+				user= User.objects.get(username=usuario)
 				if acceso.is_active:
-					login(request, acceso)
+					if user.estado_login==True:
+						return HttpResponseRedirect('/')
+					else:
+						login(request, acceso)
+						user.estado_login=True
+						user.save()
 					return HttpResponseRedirect('/')
 				else:
 					return render_to_response('noactivo.html', context_instance=RequestContext(request))
@@ -96,6 +104,8 @@ def home(request):
 	else:
 		formulario = AuthenticationForm()
 	return render_to_response('home.html',{'formulario':formulario}, context_instance=RequestContext(request))
+					
+
 
 @login_required(login_url='/')
 def privado(request):
@@ -104,6 +114,9 @@ def privado(request):
 
 @login_required(login_url='/')
 def cerrar(request):
+	usuario=request.user
+	usuario.estado_login=False
+	usuario.save()
 	logout(request)
 	return HttpResponseRedirect('/')
 
