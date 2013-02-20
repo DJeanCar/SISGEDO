@@ -8,21 +8,18 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        # Adding model 'PerfilUsuario'
-        db.create_table('principal_perfilusuario', (
+        # Adding model 'Archivadores'
+        db.create_table('principal_archivadores', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('tipo', self.gf('django.db.models.fields.CharField')(max_length=20)),
-            ('fecha_registro', self.gf('django.db.models.fields.DateField')()),
-            ('fecha_vigencia', self.gf('django.db.models.fields.DateField')()),
-            ('estado', self.gf('django.db.models.fields.BooleanField')(default=False)),
-            ('usuario', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'])),
+            ('nombre', self.gf('django.db.models.fields.CharField')(max_length=20)),
+            ('fecha', self.gf('django.db.models.fields.DateField')()),
         ))
-        db.send_create_signal('principal', ['PerfilUsuario'])
+        db.send_create_signal('principal', ['Archivadores'])
 
 
     def backwards(self, orm):
-        # Deleting model 'PerfilUsuario'
-        db.delete_table('principal_perfilusuario')
+        # Deleting model 'Archivadores'
+        db.delete_table('principal_archivadores')
 
 
     models = {
@@ -44,7 +41,6 @@ class Migration(SchemaMigration):
             'date_joined': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
             'direccion': ('django.db.models.fields.CharField', [], {'max_length': '500', 'null': 'True', 'blank': 'True'}),
             'email': ('django.db.models.fields.EmailField', [], {'max_length': '75', 'blank': 'True'}),
-            'estado_login': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'first_name': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
             'groups': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['auth.Group']", 'symmetrical': 'False', 'blank': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
@@ -65,12 +61,19 @@ class Migration(SchemaMigration):
             'model': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '100'})
         },
+        'principal.archivadores': {
+            'Meta': {'object_name': 'Archivadores'},
+            'fecha': ('django.db.models.fields.DateField', [], {}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'nombre': ('django.db.models.fields.CharField', [], {'max_length': '20'})
+        },
         'principal.perfilusuario': {
             'Meta': {'object_name': 'PerfilUsuario'},
             'estado': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'fecha_registro': ('django.db.models.fields.DateField', [], {}),
             'fecha_vigencia': ('django.db.models.fields.DateField', [], {}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'online': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'tipo': ('django.db.models.fields.CharField', [], {'max_length': '20'}),
             'usuario': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']"})
         }

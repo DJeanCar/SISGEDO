@@ -10,7 +10,12 @@ from principal.forms import RegistrarUsuarioForm, PerfilForm, EditarUserFormAdm,
 from django.http import Http404
 from django.utils import simplejson as json
 from django.core import serializers 
+<<<<<<< HEAD
 import datetime
+=======
+from django import template
+
+>>>>>>> 6bcd880d2514a04a7472eaa972d4bf292b84bb86
 
 @login_required(login_url='/')
 def usuarios(request):
@@ -84,7 +89,9 @@ def nuevo_perfil(request, id_usuario):
 		formulario=PerfilForm()
 	return render_to_response('nuevoperfil.html',{'formulario':formulario, 'dato':dato}, context_instance=RequestContext(request))
 
-def home(request):	
+
+
+def home(request):
 	if request.method == 'POST':
 		formulario = AuthenticationForm(request.POST)
 		if formulario.is_valid:
@@ -92,8 +99,14 @@ def home(request):
 			clave = request.POST['password']
 			acceso = authenticate(username=usuario, password=clave)
 			if acceso is not None:
+				user= User.objects.get(username=usuario)
 				if acceso.is_active:
-					login(request, acceso)
+					if user.estado_login==True:
+						return HttpResponseRedirect('/')
+					else:
+						login(request, acceso)
+						user.estado_login=True
+						user.save()
 					return HttpResponseRedirect('/')
 				else:
 					return render_to_response('noactivo.html', context_instance=RequestContext(request))
@@ -102,6 +115,7 @@ def home(request):
 	else:
 		formulario = AuthenticationForm()
 	return render_to_response('home.html',{'formulario':formulario}, context_instance=RequestContext(request))
+					
 
 @login_required(login_url='/')
 def privado(request):
@@ -110,6 +124,22 @@ def privado(request):
 
 @login_required(login_url='/')
 def cerrar(request):
+
+	usuario=request.user
+	usuario.estado_login=False
+	usuario.save()
+
+	try:
+		perfiles = PerfilUsuario.objects.filter(usuario = usuario)
+		if perfiles:
+			for perfil in perfiles:
+				perfil.online = False
+				perfil.save()
+		else:
+			pass
+	except:
+		pass
+
 	logout(request)
 	return HttpResponseRedirect('/')
 
@@ -138,6 +168,7 @@ def edit_estado(request):
 	estado = perfil.estado
 	return HttpResponse(estado)
 
+<<<<<<< HEAD
 
 def edit_tipo(request):
 	clave=request.POST["pk"]
@@ -150,4 +181,42 @@ def edit_fecha_cad(request):
 	dato=request.POST["value"]
 	perfil = PerfilUsuario.objects.filter(pk=clave).update(fecha_caducidad = dato)
 	return HttpResponse(True)
+=======
+def cambiar_online(request):
+	if request.is_ajax():
+		id_perfil = request.POST['id_perfil']
+		try:
+			perfil_elegido = PerfilUsuario.objects.get(pk = id_perfil)
+			usuario = perfil_elegido.usuario
+			perfiles = PerfilUsuario.objects.filter(usuario = usuario)
+			for perfil in perfiles:
+				if perfil.id == perfil_elegido.id:
+					perfil.online = True
+					perfil.save()
+				else:
+					perfil.online = False
+					perfil.save()
+			data = perfil_elegido.tipo
+		except:
+			data = False
+		return HttpResponse(data)
+	else:
+		raise Http404
+
+def resetear_clave(request):
+	if request.is_ajax():
+		id_usuario = request.POST["id"]
+		try:
+			usuario= User.objects.get(pk=id_usuario)
+			usuario.set_password(usuario.username)
+			usuario.save()
+			dato=usuario.username
+		except:
+			dato=False
+		return HttpResponse(dato)
+	else:
+		raise Http404
+
+
+>>>>>>> 6bcd880d2514a04a7472eaa972d4bf292b84bb86
 

@@ -99,6 +99,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    
 )
 
 ROOT_URLCONF = 'sisgedo.urls'
@@ -116,6 +117,10 @@ TEMPLATE_DIRS = (
     os.path.join(RUTA_PROYECTO,'plantillas'),
 )
 
+<<<<<<< HEAD
+=======
+#Contexto Procesos sirve para poner variables globales.
+>>>>>>> 6bcd880d2514a04a7472eaa972d4bf292b84bb86
 TEMPLATE_CONTEXT_PROCESSORS = (
     "django.contrib.auth.context_processors.auth",
     "django.core.context_processors.debug",
@@ -125,11 +130,18 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.tz",
     "django.contrib.messages.context_processors.messages",
     "django.contrib.auth.context_processors.auth",
+<<<<<<< HEAD
     'django.core.context_processors.request',
     #...#
 )
 
 SESSION_COOKIE_AGE = 12000000000
+=======
+    "principal.global.variables_globales",
+)
+
+SESSION_COOKIE_AGE = 1200
+>>>>>>> 6bcd880d2514a04a7472eaa972d4bf292b84bb86
 
 INSTALLED_APPS = (
     'django.contrib.auth',
