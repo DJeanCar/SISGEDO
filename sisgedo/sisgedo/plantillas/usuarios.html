@@ -66,7 +66,7 @@ Usuarios
     </table>
  </div> 
 
-<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
+<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
     <div class="modal-header">      
        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
       <h3 id="myModalLabel"></h3>
@@ -94,13 +94,9 @@ function evento()
   var id=$(this).val(); 
 
 
-<<<<<<< HEAD
   $("#myModal").load('/ajax_ver_usuario/{{id}}', function() { // load the url into the modal
       $(this).modal('show'); // display the modal on url load
   });
-=======
-  $("#myModal").modal('show'); // display the modal on url load
->>>>>>> 6bcd880d2514a04a7472eaa972d4bf292b84bb86
 
   $.ajax({
     data:{'id_usuario':id},

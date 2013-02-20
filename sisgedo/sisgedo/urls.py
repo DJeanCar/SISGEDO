@@ -21,12 +21,11 @@ urlpatterns = patterns('',
 
     url(r'^ajax-username/$', 'principal.views.ajax_username'),
     url(r'^edit_estado/$', 'principal.views.edit_estado'),
-<<<<<<< HEAD
+
     url(r'^edit_tipo/$', 'principal.views.edit_tipo'),
     url(r'^edit_fecha_cad/$', 'principal.views.edit_fecha_cad'),
-=======
+
     url(r'^ajax/cambiar-online/$', 'principal.views.cambiar_online'),
     url(r'^resetear_clave/$', 'principal.views.resetear_clave'),
->>>>>>> 6bcd880d2514a04a7472eaa972d4bf292b84bb86
-    
+
 )

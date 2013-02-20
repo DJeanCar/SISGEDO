@@ -10,12 +10,11 @@ from principal.forms import RegistrarUsuarioForm, PerfilForm, EditarUserFormAdm,
 from django.http import Http404
 from django.utils import simplejson as json
 from django.core import serializers 
-<<<<<<< HEAD
+
 import datetime
-=======
+
 from django import template
 
->>>>>>> 6bcd880d2514a04a7472eaa972d4bf292b84bb86
 
 @login_required(login_url='/')
 def usuarios(request):
@@ -168,7 +167,6 @@ def edit_estado(request):
 	estado = perfil.estado
 	return HttpResponse(estado)
 
-<<<<<<< HEAD
 
 def edit_tipo(request):
 	clave=request.POST["pk"]
@@ -181,7 +179,7 @@ def edit_fecha_cad(request):
 	dato=request.POST["value"]
 	perfil = PerfilUsuario.objects.filter(pk=clave).update(fecha_caducidad = dato)
 	return HttpResponse(True)
-=======
+
 def cambiar_online(request):
 	if request.is_ajax():
 		id_perfil = request.POST['id_perfil']
@@ -217,6 +215,4 @@ def resetear_clave(request):
 	else:
 		raise Http404
 
-
->>>>>>> 6bcd880d2514a04a7472eaa972d4bf292b84bb86
 
