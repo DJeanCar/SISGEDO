@@ -12,8 +12,8 @@ class PerfilUsuario(models.Model):
 			('administrador','administrador'),
 		)
 	tipo = models.CharField(max_length=20,choices=TIPO)
-	fecha_registro = models.DateField() 
-	fecha_vigencia = models.DateField() 
+	fecha_registro = models.DateTimeField(auto_now=True) 
+	fecha_caducidad = models.DateField() 
 	estado= models.BooleanField()
 	usuario =models.ForeignKey(User)
 

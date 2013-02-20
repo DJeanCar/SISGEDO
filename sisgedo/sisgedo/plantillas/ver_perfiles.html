@@ -7,6 +7,7 @@
 
 {% block contenido %}
 
+
 <ul class="breadcrumb">
   <li><a href="/">Sisgedo</a> <span class="divider">/</span></li>
   <li><a href="/usuarios/">Usuarios</a> <span class="divider">/</span></li>
@@ -28,9 +29,10 @@
     <table class="table table-striped table-bordered" id="example">
               <thead>
                 <tr>
+                  <th>Id</th>
                   <th>Tipo</th>
                   <th>Fecha registro</th>
-                  <th>Fecha de vigencia</th>
+                  <th>Fecha de caducidad</th>
                   <th>estado</th>
                   <th>Acciones</th>
                 </tr>
@@ -38,9 +40,19 @@
               <tbody>
                 {% for dato in verPerfil %}
                 <tr>
-                  <td>{{dato.tipo}}</td>
-                  <td>{{dato.fecha_registro}}</td>
-                  <td>{{dato.fecha_vigencia}}</td>
+                  <td>{{dato.id}}</td>
+                  <td>              
+                  <a href="#" class="tipo" data-type="select" data-pk="{{dato.id}}" data-url="/edit_tipo/" class="editable-click" >{{dato.tipo}}</a>
+
+                  </td>
+                  <td>{{dato.fecha_registro}}
+                    
+                  </td>
+                  <td>
+                   <input type="hidden" class="fechaReg" value="{{dato.fecha_registro|date:"Ymd" }}"/>
+                    <a href="#" class="fecha_caducidad" data-type="date" data-pk="{{dato.id}}" data-url="/edit_fecha_cad/" class="editable-click" >{{dato.fecha_caducidad}}</a>
+                  <span class="help-inline"></span>
+                  </td>
                  
                   <td> 
                       {% if dato.estado == 1 %}
@@ -58,6 +70,7 @@
                   </td>
                 </tr>
                 {% endfor %}
+
               </tbody>
             </table> 
                      
@@ -71,6 +84,7 @@
       <h3 id="myModalLabel">Crear Perfil</h3>
     </div>
     <div class="modal-body">  
+    
     </div>    
 </div>
 
@@ -82,43 +96,61 @@
     <div class="modal-body">  
     </div>    
 </div>
-
-<script src="http://code.jquery.com/jquery-1.9.0.min.js"></script>
+{% endblock%}
+{% block script %}
 
 <script>
+$.fn.editable.defaults.mode = 'inline';
+
 
 $(document).on("ready", inicio);
-$(document).on("ready", setup);
-  function setup(){
-    $.ajaxSetup({
-      beforeSend: function(xhr, settings) {
-        function getCookie(name) {
-          var cookieValue = null;
-            if (document.cookie && document.cookie != '') {
-              var cookies = document.cookie.split(';');
-                for (var i = 0; i < cookies.length; i++) {
-                  var cookie = jQuery.trim(cookies[i]);
-                  // Does this cookie string begin with the name we want?
-                    if (cookie.substring(0, name.length + 1) == (name + '=')) {
-                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                    break;
-                    }
-                }
-            }
-        return cookieValue;
-        }
-        if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
-      // Only send the token to relative URLs i.e. locally.
-          xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
-        }
-      }
-    });
-  }
 
 function inicio()
 {
   $( "input[type=checkbox]" ).on( "change", evento);
+
+     $('.tipo').editable({      
+      source: [
+      {value: 'Operario', text: 'Operario'},
+      {value: 'Supervisor', text: 'Supervisor'},
+      {value: 'Administrador', text: 'Administrador'}
+      ]
+  });
+
+
+  $('.fecha_caducidad').editable({
+      format: 'yyyy-mm-dd',
+      viewformat: 'dd-mm-yyyy',       
+
+      validate: function(value)
+       {
+   
+       var day=value.getDate()+1;
+       var mes=value.getMonth()+1;
+       var anio=value.getFullYear();
+       if (day<10) day="0"+day;
+       if(mes<10) mes="0"+mes;
+       var fecha=anio+mes+day;
+
+       
+       var inicio=$(this).parent().children('.fechaReg').val();
+
+          if(fecha<inicio) 
+          {        
+
+          return 'No es posible!';           
+          
+        }
+      }
+    
+  });
+
+
+
 }
+
+
+
 function evento()
 {
     var $checkbox1 = $(this);

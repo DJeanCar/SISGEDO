@@ -10,6 +10,7 @@ from principal.forms import RegistrarUsuarioForm, PerfilForm, EditarUserFormAdm,
 from django.http import Http404
 from django.utils import simplejson as json
 from django.core import serializers 
+import datetime
 
 @login_required(login_url='/')
 def usuarios(request):
@@ -53,12 +54,16 @@ def editar_perfil(request, id_perfil):
 	return render_to_response('editar_perfil.html', {'formulario':formulario, 'perfil':perfil}, context_instance=RequestContext(request))
 
 @login_required(login_url='/')
-def ver_usuario(request):	
-	clave=request.GET['id_usuario']
-	usuario = User.objects.get(pk=clave) 
-	data=json.dumps({'nombre':usuario.first_name,'apellido':usuario.last_name, 'email':usuario.email,'user':usuario.username,'direccion':usuario.direccion,'telefono':usuario.telefono})
+def ajax_ver_usuario(request):	
+	if request.is_ajax():
+		clave=request.GET['id_usuario']
+		usuario = User.objects.get(pk=clave) 
+		data=json.dumps({'nombre':usuario.first_name,'apellido':usuario.last_name, 'email':usuario.email,'user':usuario.username,'direccion':usuario.direccion,'telefono':usuario.telefono})
+		
+		return HttpResponse(data, mimetype="application/json")
+	else:
+		raise Http404
 	
-	return HttpResponse(data, mimetype="application/json")
 
 @login_required(login_url='/')
 def ver_perfiles(request, id_usuario):	
@@ -69,6 +74,7 @@ def ver_perfiles(request, id_usuario):
 @login_required(login_url='/')
 def nuevo_perfil(request, id_usuario):	
 	dato = User.objects.get(pk=id_usuario)
+	#date_now=datetime.datetime.now()
 	if request.method=='POST':
 		formulario=PerfilForm(request.POST)
 		if formulario.is_valid():
@@ -123,9 +129,25 @@ def edit_estado(request):
 	clave=request.POST["id_perfil_edit"]
 	perfil = PerfilUsuario.objects.get(pk = clave)
 	if perfil.estado == True:
-		perfil.estado = False
+		#perfil.estado = False
+		PerfilUsuario.objects.filter(pk=clave).update(estado = False)
 	else:
-		perfil.estado = True
-	perfil.save()
+		#perfil.estado = True
+		PerfilUsuario.objects.filter(pk=clave).update(estado = True)
+	#perfil.save()
 	estado = perfil.estado
 	return HttpResponse(estado)
+
+
+def edit_tipo(request):
+	clave=request.POST["pk"]
+	dato=request.POST["value"]
+	perfil = PerfilUsuario.objects.filter(pk=clave).update(tipo = dato)
+	return HttpResponse(True)
+
+def edit_fecha_cad(request):
+	clave=request.POST["pk"]
+	dato=request.POST["value"]
+	perfil = PerfilUsuario.objects.filter(pk=clave).update(fecha_caducidad = dato)
+	return HttpResponse(True)
+

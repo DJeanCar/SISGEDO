@@ -3,6 +3,7 @@
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> 
+
 <html class="no-js" lang='es'> <!--<![endif]-->
     <head>
         <meta charset="utf-8">
@@ -21,6 +22,8 @@
         <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/bootstrap-responsive.min.css">
         <link rel="stylesheet" href="{{STATIC_URL}}css/datepicker.css" />
         <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/main.css">
+        <link rel="stylesheet" href="{{STATIC_URL}}/css/bootstrap-editable.css"> 
+
     </head>
     <body>       
         <div class="navbar navbar-inverse navbar-fixed-top">
@@ -83,12 +86,42 @@
         <script src="{{STATIC_URL}}js/bootstrap-datepicker.js"></script>
         <script src='{{STATIC_URL}}js/validateform.js'></script>
         <script src='{{STATIC_URL}}js/main.js'></script>
+        <script src="{{STATIC_URL}}js/bootstrap-editable.js"></script>
+       
         {% block script %}{% endblock %}
         <script>
             var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
             (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
             g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
             s.parentNode.insertBefore(g,s)}(document,'script'));
+            $(document).on("ready", setup);
+  function setup(){
+    $.ajaxSetup({
+      beforeSend: function(xhr, settings) {
+        function getCookie(name) {
+          var cookieValue = null;
+            if (document.cookie && document.cookie != '') {
+              var cookies = document.cookie.split(';');
+                for (var i = 0; i < cookies.length; i++) {
+                  var cookie = jQuery.trim(cookies[i]);
+                  // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                    }
+                }
+            }
+        return cookieValue;
+        }
+        if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
+      // Only send the token to relative URLs i.e. locally.
+          xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+        }
+      }
+    });
+  }
+
         </script>
+
     </body>
 </html>

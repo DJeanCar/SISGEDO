@@ -8,9 +8,9 @@ urlpatterns = patterns('',
     url(r'^usuarios/$', 'principal.views.usuarios'),
 	url(r'^usuarios/registrar/$', 'principal.views.registrar_usuario'),
     url(r'^usuarios/editar/(?P<id_usuario>\d+)$', 'principal.views.editar_usuario'),
-    url(r'^usuarios/(?P<id_usuario>\d+)/perfiles$','principal.views.ver_perfiles'),
+    url(r'^usuarios/(?P<id_usuario>\d+)/perfiles/$','principal.views.ver_perfiles'),
 
-    url(r'^ver_usuario/$','principal.views.ver_usuario'),
+    url(r'^ajax_ver_usuario/$','principal.views.ajax_ver_usuario'),
     url(r'^nuevo_perfil/(?P<id_usuario>\d+)$','principal.views.nuevo_perfil'),
 
     url(r'^cerrar/$', 'principal.views.cerrar'),
@@ -21,4 +21,7 @@ urlpatterns = patterns('',
 
     url(r'^ajax-username/$', 'principal.views.ajax_username'),
     url(r'^edit_estado/$', 'principal.views.edit_estado'),
+    url(r'^edit_tipo/$', 'principal.views.edit_tipo'),
+    url(r'^edit_fecha_cad/$', 'principal.views.edit_fecha_cad'),
+    
 )

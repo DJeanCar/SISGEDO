@@ -83,14 +83,14 @@ function evento()
   var id=$(this).val(); 
 
 
-  $("#myModal").load('/ver_usuario/{{id}}', function() { // load the url into the modal
+  $("#myModal").load('/ajax_ver_usuario/{{id}}', function() { // load the url into the modal
       $(this).modal('show'); // display the modal on url load
   });
 
   $.ajax({
     data:{'id_usuario':id},
     type:"get",
-    url:'/ver_usuario/',
+    url:'/ajax_ver_usuario/',
     
     success:function(data)
     {  

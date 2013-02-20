@@ -89,6 +89,8 @@ TEMPLATE_LOADERS = (
 #     'django.template.loaders.eggs.Loader',
 )
 
+
+
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -104,6 +106,9 @@ ROOT_URLCONF = 'sisgedo.urls'
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'sisgedo.wsgi.application'
 
+
+
+
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
@@ -111,7 +116,20 @@ TEMPLATE_DIRS = (
     os.path.join(RUTA_PROYECTO,'plantillas'),
 )
 
-SESSION_COOKIE_AGE = 1200
+TEMPLATE_CONTEXT_PROCESSORS = (
+    "django.contrib.auth.context_processors.auth",
+    "django.core.context_processors.debug",
+    "django.core.context_processors.i18n",
+    "django.core.context_processors.media",
+    "django.core.context_processors.static",
+    "django.core.context_processors.tz",
+    "django.contrib.messages.context_processors.messages",
+    "django.contrib.auth.context_processors.auth",
+    'django.core.context_processors.request',
+    #...#
+)
+
+SESSION_COOKIE_AGE = 12000000000
 
 INSTALLED_APPS = (
     'django.contrib.auth',
@@ -124,8 +142,10 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     'django.contrib.admindocs',
+    'inplaceeditform',
     'principal',
     'south',
+   
 )
 
 # A sample logging configuration. The only tangible logging
@@ -156,3 +176,15 @@ LOGGING = {
         },
     }
 }
+
+
+INPLACEEDIT_EDIT_EMPTY_VALUE = 'Doble click to edit'
+INPLACEEDIT_AUTO_SAVE = True
+INPLACEEDIT_EVENT = "dblclick"
+INPLACEEDIT_DISABLE_CLICK = True  # For inplace edit text into a link tag
+INPLACEEDIT_EDIT_MESSAGE_TRANSLATION = 'Write a translation' # transmeta option
+DEFAULT_INPLACE_EDIT_OPTIONS = {} # dictionnary of the optionals parameters that the templatetag can receive to change its behavior (see the Advanced usage section)
+DEFAULT_INPLACE_EDIT_OPTIONS_ONE_BY_ONE = True # modify the behavior of the DEFAULT_INPLACE_EDIT_OPTIONS usage, if True then it use the default values not specified in your template, if False it uses these options only when the dictionnary is empty (when you do put any options in your template)
+
+
+
